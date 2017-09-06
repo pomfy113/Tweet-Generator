@@ -1,7 +1,18 @@
 import random
 
-quotes = open("/usr/share/dict/words").read().splitlines()
+# Change filename to open a different set of words
+dictionary = open("/usr/share/dict/words").read().splitlines()
 
-#def random_python_quote():
-rand_index = random.randint(0, len(quotes) - 1)
-print quotes[rand_index]
+# How long the sentence is; between 5 and 10
+# Can change this
+wordAmt = random.randint(5, 10)
+wordlist = []
+
+for index in range(wordAmt):
+    # randomizer for the index;
+    rand_index = random.randint(0, len(dictionary) - 1)
+    wordlist.append(dictionary[rand_index])
+
+print(" ").join(wordlist) + '.'
+
+# Rand_index = random.randint(0, len(dictionary) - 1)
