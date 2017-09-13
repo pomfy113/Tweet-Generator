@@ -2,6 +2,9 @@ import random
 import string
 import numpy
 import re
+import time
+
+start_time = time.time()
 
 # What's being passed in
 # "filename" for passing in a file; change if you have a different filename
@@ -20,8 +23,8 @@ dictionary = open(filename).read().split()
 # alreadyplaced has words that have showed up at least once
 # currentWord is the index of the current word on either list
 dictlist = []
-alreadyplaced = []
 probability = []
+
 totalwords = len(dictionary)
 currentWord = 0
 
@@ -29,17 +32,15 @@ currentWord = 0
 # also makes sure to filter out non-alphanumerics and changes it to lowercase
 for i in range(len(dictionary)):
     dictionary[i] = re.sub('[^0-9a-zA-Z]+', '', dictionary[i]).lower()
-    # if the current word has already been seen,
-    # find its index; add 1 to how many times the word shows up
-    if dictionary[i] in alreadyplaced:
-        currentWord = alreadyplaced.index(dictionary[i])
+
+    if dictionary[i] in [item[0] for item in dictlist]:
+        currentWord = [item[0] for item in dictlist].index(dictionary[i])
         dictlist[currentWord] = [dictlist[currentWord][0], dictlist[currentWord][1]+1]
     # if it's the first time, then it showed up once!
     # add that to both lists; dictlist will say it showed up once
     # alreadyplaced says that it has shown up before
     else:
         dictlist.append([dictionary[i], 1])
-        alreadyplaced.append(dictionary[i])
 # prints out each word and its occurences, without all the fuss
 
 # probability equation for each word
@@ -51,5 +52,6 @@ for k in range(len(dictlist)):
 # re.sub removes all non-space and alphanumeric
 # numpy.random.choice prints out the words based on a probability
 # for probability chances, please see/print out the probability list!
-probabilityList = re.sub('[^0-9a-zA-Z ]+', '', str(numpy.random.choice(alreadyplaced, 10, p=probability)))
+probabilityList = re.sub('[^0-9a-zA-Z ]+', '', str(numpy.random.choice([item[0] for item in dictlist], 10, p=probability)))
 print (probabilityList.capitalize() + ".")
+print("--- %s seconds ---" % (time.time() - start_time))
