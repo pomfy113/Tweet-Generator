@@ -7,13 +7,13 @@ import re
 # "filename" for passing in a file; change if you have a different filename
 # Otherwise, use testfilename to pass in your own string
 filename = "/Users/fcruz/Documents/GitHub/Tweet-Maker/grimm.txt"
-# testfilename = "egg fish egg fish James James James James egg egg egg EGG FISH. egg jAmEs"
+# filename = "egg fish egg fish James James James James egg egg egg EGG FISH. egg jAmEs"
 # testfilename = "egg egg egg egg egg egg egg egg egg egg fish"
 
 # Comment below is from switching to a file to the string above
 # Change as needed
 dictionary = open(filename).read().split()
-# dictionary = testfilename.split()
+# dictionary = filename.split()
 
 # Lists and variables for later
 # dictlist is a list of lists; each list has the unique word + occurences
@@ -28,7 +28,7 @@ currentWord = 0
 # loops through length of passed in strings
 # also makes sure to filter out non-alphanumerics and changes it to lowercase
 for i in range(len(dictionary)):
-    dictionary[i] = filter(str.isalnum, dictionary[i].lower())
+    dictionary[i] = re.sub('[^0-9a-zA-Z]+', '', dictionary[i]).lower()
     # if the current word has already been seen,
     # find its index; add 1 to how many times the word shows up
     if dictionary[i] in alreadyplaced:
@@ -52,4 +52,4 @@ for k in range(len(dictlist)):
 # numpy.random.choice prints out the words based on a probability
 # for probability chances, please see/print out the probability list!
 probabilityList = re.sub('[^0-9a-zA-Z ]+', '', str(numpy.random.choice(alreadyplaced, 10, p=probability)))
-print probabilityList + "."
+print (probabilityList.capitalize() + ".")
