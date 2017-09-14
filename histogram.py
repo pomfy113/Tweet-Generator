@@ -30,7 +30,7 @@ def makeList(dictionary):
     # Loops through every element in dictionary
     # Removes any non alphanumeric; turns everything into lowercase
     for i in range(len(dictionary)):
-        dictionary[i] = re.sub('[^0-9a-zA-Z]+', '', dictionary[i]).lower()
+        dictionary[i] = re.sub('[^a-zA-Z]+', '', dictionary[i]).lower()
 
         # Check if already seen; if so, add 1 to occurences
         # Second element is how many times the word has occurred already
@@ -42,7 +42,6 @@ def makeList(dictionary):
         else:
             dictlist.append([dictionary[i], 1])
             alreadyplaced.append(dictionary[i])
-
     return (dictlist, alreadyplaced)
 
 # Generates probability list of word based on occurences
