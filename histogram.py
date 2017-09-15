@@ -42,7 +42,7 @@ def makeList(dictionary):
         else:
             dictlist.append([dictionary[i], 1])
             alreadyplaced.append(dictionary[i])
-    return (dictlist, alreadyplaced)
+    return dictlist
 
 # Generates probability list of word based on occurences
 def probGen(dictlist, dictionary):
@@ -53,14 +53,14 @@ def probGen(dictlist, dictionary):
     return probability
 
 # Print function
-def printGen(alreadyplaced,probability):
+def printGen(dictlist,probability):
     # Generates words based on probability, makes it into string, puts into list
     # Removes all non-alphanumeric (mostly brackets and commas)
-    finishedList = str(numpy.random.choice(alreadyplaced,10,p=probability))
+    finishedList = str(numpy.random.choice([item[0] for item in dictlist],10,p=probability))
     print (re.sub('[^0-9a-zA-Z ]+', '', finishedList).capitalize() + ".")
 
 if __name__ == "__main__":
     dictionary = grabFile()
-    dictlist,alreadyplaced = makeList(dictionary)
-    printGen(alreadyplaced,probGen(dictlist,dictionary))
+    dictlist = makeList(dictionary)
+    printGen(dictlist,probGen(dictlist,dictionary))
     print("--- %s seconds ---" % (time.time() - start_time))
