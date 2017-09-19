@@ -11,7 +11,7 @@ def grabFile():
     # What strings are being passed in
     # Uncomment things as needed
     filename = "/Users/fcruz/Documents/GitHub/Tweet-Maker/grimm.txt"
-    # filename = "egg fish egg fish James James James James egg egg egg EGG FISH. egg jAmEs"
+    # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy"
 
     # Placing individual words into dictionary list
     # Use the commented one for strings
@@ -51,6 +51,10 @@ def probGen(dictlist, dictionary):
     for k in range(len(dictlist)):
         probability.append(float(dictlist[k][1])/len(dictionary))
     return probability
+[egg, 4], [cake, 2]
+
+['egg', 'cake']
+[0.2, 0.3]
 
 # Print function
 def printGen(dictlist,probability):

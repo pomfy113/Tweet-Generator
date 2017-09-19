@@ -11,7 +11,7 @@ def grabFile():
     # What strings are being passed in
     # Uncomment things as needed
     filename = "/Users/fcruz/Documents/GitHub/Tweet-Maker/grimm.txt"
-    # filename = "egg fish egg fish James James James James egg egg egg EGG FISH. egg jAmEs"
+    # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy"
 
     # Placing individual words into fileInput list
     # Use the commented one for strings
@@ -28,19 +28,19 @@ def makeList(fileInput):
     currentWord = 0
     # Loops through every element in fileInput
     # Removes any non alphanumeric; turns everything into lowercase
-    for i in range(len(fileInput)):
-        fileInput[i] = re.sub('[^0-9a-zA-Z]+', '', fileInput[i]).lower()
+    for word in fileInput:
+        word = re.sub('[^a-zA-Z\-]+', '', word).lower()
 
         # Check if already seen; if so, add 1 to occurences
         # Second element is how many times the word has occurred already
-        if fileInput[i] in dictList:
-            dictList[fileInput[i]] +=1
+        if word in dictList:
+            dictList[word] +=1
 
         # If not seen yet, create a new list within dictList
         # First occurence means second element is "1" (see above)
         else:
-            dictList[fileInput[i]] = 1
-            placedWords.append(fileInput[i])
+            dictList[word] = 1
+            placedWords.append(word)
     return (dictList, placedWords)
 
 # Generates probability list of word based on occurences
@@ -57,7 +57,8 @@ def printGen(placedWords,probability):
     # Generates words based on probability, makes it into string, puts into list
     # Removes all non-alphanumeric (mostly brackets and commas)
     finishedList = str(numpy.random.choice(placedWords,10,p=probability))
-    print (re.sub('[^0-9a-zA-Z]+', '', finishedList).capitalize() + ".")
+    print (finishedList)
+    print (re.sub('[^a-zA-Z\- ]+', '', finishedList).capitalize() + ".")
 
 def histogram(dictList):
     print (dictList)
@@ -68,12 +69,13 @@ def frequency(word, dictList):
     if word in dictList:
         print("The word", "'"+word+"'", "shows up", dictList[word], "times.")
 
+
 # Main function
 if __name__ == "__main__":
     fileInput = grabFile()
     dictList,placedWords = makeList(fileInput)
     printGen(placedWords,probGen(dictList,placedWords, len(fileInput)))
     print("--- %s seconds ---" % (time.time() - start_time))
-    histogram(dictList)
+    #histogram(dictList)
     uniqueWords(dictList)
     frequency("the", dictList)
