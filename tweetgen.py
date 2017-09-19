@@ -26,7 +26,6 @@ def makeList(fileInput):
     placedWords = []
     totalwords = len(fileInput)
     currentWord = 0
-
     # Loops through every element in fileInput
     # Removes any non alphanumeric; turns everything into lowercase
     for i in range(len(fileInput)):
@@ -58,7 +57,16 @@ def printGen(placedWords,probability):
     # Generates words based on probability, makes it into string, puts into list
     # Removes all non-alphanumeric (mostly brackets and commas)
     finishedList = str(numpy.random.choice(placedWords,10,p=probability))
-    print (re.sub('[^0-9a-zA-Z ]+', '', finishedList).capitalize() + ".")
+    print (re.sub('[^0-9a-zA-Z]+', '', finishedList).capitalize() + ".")
+
+def histogram(dictList):
+    print (dictList)
+
+def uniqueWords(dictList):
+    print ("There are", len(dictList), "unique words.")
+def frequency(word, dictList):
+    if word in dictList:
+        print("The word", "'"+word+"'", "shows up", dictList[word], "times.")
 
 # Main function
 if __name__ == "__main__":
@@ -66,3 +74,6 @@ if __name__ == "__main__":
     dictList,placedWords = makeList(fileInput)
     printGen(placedWords,probGen(dictList,placedWords, len(fileInput)))
     print("--- %s seconds ---" % (time.time() - start_time))
+    histogram(dictList)
+    uniqueWords(dictList)
+    frequency("the", dictList)

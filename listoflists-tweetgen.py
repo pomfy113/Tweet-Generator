@@ -23,7 +23,7 @@ def grabFile():
 def makeList(dictionary):
     # Init
     dictlist = []
-    alreadyplaced = []
+    placedWords = []
     totalwords = len(dictionary)
     currentWord = 0
 
@@ -34,14 +34,14 @@ def makeList(dictionary):
 
         # Check if already seen; if so, add 1 to occurences
         # Second element is how many times the word has occurred already
-        if dictionary[i] in alreadyplaced:
-            dictlist[alreadyplaced.index(dictionary[i])][1] += 1
+        if dictionary[i] in placedWords:
+            dictlist[placedWords.index(dictionary[i])][1] += 1
 
         # If not seen yet, create a new list within dictlist
         # First occurence means second element is "1" (see above)
         else:
             dictlist.append([dictionary[i], 1])
-            alreadyplaced.append(dictionary[i])
+            placedWords.append(dictionary[i])
     return dictlist
 
 # Generates probability list of word based on occurences
