@@ -52,8 +52,8 @@ def probGen(dictList, parsedWords, inputLen):
     # Making a list of probability; can access probability using indexes
     probability = []
     # Divide the occurence amount by total amount of words
-    for k in range(len(dictList)):
-        probability.append(float(dictList[parsedWords[k]])/inputLen)
+    for keys, values in dictList.items():
+        probability.append(float(values/inputLen))
     return probability
 
 
@@ -61,15 +61,16 @@ def probGen(dictList, parsedWords, inputLen):
 def printGen(parsedWords, probability):
     # Generates words based on probability, makes into string, puts into list
     # Removes all non-alphanumeric (mostly brackets and commas)
-    finishedList = str(numpy.random.choice(parsedWords, 10, p=probability))
+    finishedList = str(numpy.random.choice(list(dictList.keys()), 10, p=probability))
     print(finishedList)
     print(re.sub('[^a-zA-Z\-\ ]+', '', finishedList).capitalize() + ".")
 
 
 # Everything is already histogram'd!
 def histogram(dictList):
-    for keys,values in dictList.items():
+    for keys, values in dictList.items():
         print(keys, values)
+
 
 # What's passed in is the size of the list with unique words
 def uniqueWords(uniqueWordAmt):
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     # Probability list!
     probList = probGen(dictList, parsedWords, len(fileInput))
     # Print!
-    printGen(parsedWords, probList)
+    printGen(dictList, probList)
 
     # Word you want to search up for frequency; change as needed
     word = "the"
