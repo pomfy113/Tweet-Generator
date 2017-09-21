@@ -26,7 +26,6 @@ def grabFile():
 def makeList(fileInput):
     # Init
     dictList = {}
-    parsedWords = []
     totalwords = len(fileInput)
     currentWord = 0
     # Loops through every element in fileInput
@@ -43,33 +42,32 @@ def makeList(fileInput):
         # First occurence means second element is "1" (see above)
         else:
             dictList[word] = 1
-            parsedWords.append(word)
-    return (dictList, parsedWords)
+    return dictList
 
 
 # Generates probability list of word based on occurences
-def probGen(dictList, parsedWords, inputLen):
+def probGen(dictList, inputLen):
     # Making a list of probability; can access probability using indexes
     probability = []
     # Divide the occurence amount by total amount of words
     for keys, values in dictList.items():
         probability.append(float(values/inputLen))
-    return probability
+    # Generates words based on probability, makes into string, puts into list
+    finishedList = str(numpy.random.choice(list(dictList.keys()), 10, p=probability))
+    return finishedList
 
 
 # Print function
-def printGen(parsedWords, probability):
-    # Generates words based on probability, makes into string, puts into list
+def printGen(dictList):
     # Removes all non-alphanumeric (mostly brackets and commas)
-    finishedList = str(numpy.random.choice(list(dictList.keys()), 10, p=probability))
-    print(finishedList)
     print(re.sub('[^a-zA-Z\-\ ]+', '', finishedList).capitalize() + ".")
 
 
 # Everything is already histogram'd!
+# Made sure to sort it
 def histogram(dictList):
-    for keys, values in dictList.items():
-        print(keys, values)
+    for value, key in sorted(dictList.items(), key = lambda s: s[1], reverse=True):
+        print("%s, %s" % (value, key))
 
 
 # What's passed in is the size of the list with unique words
@@ -77,28 +75,31 @@ def uniqueWords(uniqueWordAmt):
     print("There are", uniqueWordAmt, "unique words.")
 
 
-# Returns whatever the word's frequency is
+# Prints whatever the word's frequency is
 def frequency(word, dictList):
     if word in dictList:
         print("The word", "'"+word+"'", "shows up", dictList[word], "times.")
+    else:
+        print("The word",  "'"+word+"'", "does not show up!")
 
 
 # Main function
 if __name__ == "__main__":
     # If you want a different file, see the grabFile function
     fileInput = grabFile()
-    # Use input file; get dictionary of words+occurences and all unique words
-    dictList, parsedWords = makeList(fileInput)
-    # Probability list!
-    probList = probGen(dictList, parsedWords, len(fileInput))
+    fileLength = len(fileInput)
+    # Use input file; get dictionary of words+occurences
+    dictList = makeList(fileInput)
+    # List based on probability!
+    finishedList = probGen(dictList, fileLength)
     # Print!
-    printGen(dictList, probList)
+    printGen(finishedList)
 
     # Word you want to search up for frequency; change as needed
     word = "the"
     # The three programs needed
     histogram(dictList)
-    uniqueWords(len(parsedWords))
-    frequency(word, dictList)
+    uniqueWords(fileLength)
+    frequency(word.lower(), dictList)
     # Timer!
     print("--- %s seconds ---" % (time.time() - start_time))
