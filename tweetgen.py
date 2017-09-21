@@ -26,8 +26,6 @@ def grabFile():
 def makeList(fileInput):
     # Init
     dictList = {}
-    totalwords = len(fileInput)
-    currentWord = 0
     # Loops through every element in fileInput
     # Removes any non alphanumeric; turns everything into lowercase
     for word in fileInput:
@@ -87,11 +85,11 @@ def frequency(word, dictList):
 if __name__ == "__main__":
     # If you want a different file, see the grabFile function
     fileInput = grabFile()
-    fileLength = len(fileInput)
+    inputLen = len(fileInput)
     # Use input file; get dictionary of words+occurences
     dictList = makeList(fileInput)
     # List based on probability!
-    finishedList = probGen(dictList, fileLength)
+    finishedList = probGen(dictList, inputLen)
     # Print!
     printGen(finishedList)
 
@@ -99,7 +97,7 @@ if __name__ == "__main__":
     word = "the"
     # The three programs needed
     histogram(dictList)
-    uniqueWords(fileLength)
+    uniqueWords(inputLen)
     frequency(word.lower(), dictList)
     # Timer!
     print("--- %s seconds ---" % (time.time() - start_time))
