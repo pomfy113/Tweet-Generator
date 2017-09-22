@@ -1,6 +1,4 @@
 import random
-import string
-import numpy
 import re
 import time
 
@@ -13,7 +11,7 @@ def grabFile():
     # What strings are being passed in
     # Uncomment things as needed
     filename = "/Users/fcruz/Documents/GitHub/Tweet-Maker/grimm.txt"
-    # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy"
+    # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy eg'g"
 
     # Placing individual words into fileInput list
     # Use the commented one for strings
@@ -43,29 +41,39 @@ def makeList(fileInput):
     return dictList
 
 
-# Generates probability list of word based on occurences
-def probGen(dictList, inputLen):
-    # Making a list of probability; can access probability using indexes
-    probability = []
-    # Divide the occurence amount by total amount of words
-    for keys, values in dictList.items():
-        probability.append(float(values/inputLen))
-    # Generates words based on probability, makes into string, puts into list
-    finishedList = str(numpy.random.choice(list(dictList.keys()), 10, p=probability))
+# Generates list based on probability and weights
+def probGen(dictList, inputLen, wordAmt):
+    # Finished list, the randomizer, and the number that goes up each time
+    finishedList = []
+    randomNum = random.random()
+    accumulator = 0.0
+    # Depending on how long you want the phrase to be,
+    # Go through dictionary; keep adding its weight to accumulator
+    # When accumulator hits over the random number, append to list
+    for i in range(wordAmt):
+        for key, value in dictList.items():
+            accumulator += float(value/inputLen)
+            if accumulator >= randomNum:
+                randomNum = random.random()
+                accumulator = 0.0
+                finishedList.append(key)
+                break
     return finishedList
 
 
 # Print function
-def printGen(dictList):
+def printGen(finishedList):
     # Removes all non-alphanumeric (mostly brackets and commas)
-    print(re.sub('[^a-zA-Z\-\ ]+', '', finishedList).capitalize() + ".")
+    print(' '.join(finishedList).capitalize() + ".")
 
 
 # Everything is already histogram'd!
 # Made sure to sort it
 def histogram(dictList):
-    for value, key in sorted(dictList.items(), key = lambda s: s[1], reverse=True):
-        print("%s, %s" % (value, key))
+    histofile = open("histogram.txt", "w+")
+    for value, key in sorted(dictList.items(), key=lambda s: s[1], reverse=True):
+        histofile.write("%s, %s \n" % (value, key))
+    histofile.close()
 
 
 # What's passed in is the size of the list with unique words
@@ -89,7 +97,9 @@ if __name__ == "__main__":
     # Use input file; get dictionary of words+occurences
     dictList = makeList(fileInput)
     # List based on probability!
-    finishedList = probGen(dictList, inputLen)
+    # Also how long you want the string to be
+    wordAmt = 10
+    finishedList = probGen(dictList, inputLen, wordAmt)
     # Print!
     printGen(finishedList)
 
