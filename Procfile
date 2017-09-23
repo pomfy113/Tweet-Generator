@@ -1,1 +1,1 @@
-web: gunicorn tweetgen.py
+web: gunicorn server:app
