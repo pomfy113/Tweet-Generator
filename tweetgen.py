@@ -10,7 +10,7 @@ start_time = time.time()
 def grabFile():
     # What strings are being passed in
     # Uncomment things as needed
-    filename = "/Users/fcruz/Documents/GitHub/Tweet-Maker/grimm.txt"
+    filename = "/grimm.txt"
     # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy eg'g"
 
     # Placing individual words into fileInput list
