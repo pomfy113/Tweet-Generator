@@ -2,6 +2,10 @@ import random
 import re
 import time
 from flask import Flask
+from flask import render_template
+from flask import request, url_for
+
+
 app = Flask(__name__)
 
 
@@ -68,7 +72,6 @@ def printGen(finishedList):
     return(' '.join(finishedList).capitalize() + ".")
 
 
-
 # Everything is already histogram'd!
 # Made sure to sort it
 def histogram(dictList):
@@ -90,7 +93,8 @@ def frequency(word, dictList):
     else:
         print("The word",  "'"+word+"'", "does not show up!")
 
-@app.route("/")
+
+@app.route('/')
 def main():
     # start time!
     start_time = time.time()
@@ -101,7 +105,14 @@ def main():
     dictList = makeList(fileInput)
     # List based on probability!
     # Also how long you want the string to be
-    wordAmt = 10
+    wordAmtInput = request.args.get('num', '')
+    if wordAmtInput == '':
+        wordAmt = 10
+    else:
+        wordAmt = int(wordAmtInput)
+    # wordAmt = int(request.args.get('num', ''))
+    # if wordAmt = '':
+    #     wordAmt = 10
     finishedList = probGen(dictList, inputLen, wordAmt)
     # Print!
     printGen(finishedList)
