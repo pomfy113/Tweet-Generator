@@ -60,10 +60,16 @@ def probGen(dictList, inputLen, wordAmt):
             if accumulator >= randomNum:
                 randomNum = random.random()
                 accumulator = 0.0
+                cleanUp(key)
                 finishedList.append(key)
                 break
     return finishedList
 
+def cleanUp(key):
+    if key == "i":
+        return "I"
+    else:
+        return key
 
 # Print function
 def printGen(finishedList):
@@ -125,8 +131,13 @@ def main():
     frequency(word.lower(), dictList)
     # Timer!
     print("--- %s seconds ---" % (time.time() - start_time))
-    return printGen(finishedList)
+    return render_template('main.html', output=printGen(finishedList))
 
+
+@app.route('/<url>')
+def redirect(url):
+    url = url+'.html'
+    return render_template(url)
 
 if __name__ == "__main__":
     main()
