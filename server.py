@@ -1,6 +1,7 @@
 import random
 import re
 import time
+import string
 from flask import Flask
 from flask import render_template
 from flask import request, url_for
@@ -27,11 +28,14 @@ def grabFile():
 # Makes list of lists that has the word and how many occurences it has
 def makeList(fileInput):
     # Init
+    capitalizethese = ('i')
     dictList = {}
     # Loops through every element in fileInput
     # Removes any non alphanumeric; turns everything into lowercase
     for word in fileInput:
         word = re.sub('[^a-zA-Z\-]+', '', word).lower()
+        if word in capitalizethese:
+            word = word.capitalize()
 
         # Check if already seen; if so, add 1 to occurences
         # Second element is how many times the word has occurred already
@@ -60,22 +64,17 @@ def probGen(dictList, inputLen, wordAmt):
             if accumulator >= randomNum:
                 randomNum = random.random()
                 accumulator = 0.0
-                cleanUp(key)
                 finishedList.append(key)
                 break
+    finishedList[0] = finishedList[0].capitalize()
     return finishedList
 
-def cleanUp(key):
-    if key == "i":
-        return "I"
-    else:
-        return key
 
 # Print function
 def printGen(finishedList):
     # Removes all non-alphanumeric (mostly brackets and commas)
-    print(' '.join(finishedList).capitalize() + ".")
-    return(' '.join(finishedList).capitalize() + ".")
+    print(' '.join(finishedList) + ".")
+    return(' '.join(finishedList) + ".")
 
 
 # Everything is already histogram'd!
@@ -136,8 +135,7 @@ def main():
 
 @app.route('/<url>')
 def redirect(url):
-    url = url+'.html'
-    return render_template(url)
+    return render_template(url+'.html')
 
 if __name__ == "__main__":
     main()
