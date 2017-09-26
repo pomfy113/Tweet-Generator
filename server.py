@@ -10,40 +10,35 @@ from flask import request, url_for
 app = Flask(__name__)
 
 
-# Timer for checking how fast it runs
-# Grabs a file and returns the fileInput file
+
 def grabFile():
-    # What strings are being passed in
-    # Uncomment things as needed
+    """Grabs file and splits it all into a list of words"""
+    # Test string below filename
     filename = "grimm.txt"
-    # filename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy eg'g"
+    # testfilename = "egg fish egg fish Jimmy Jimmy Jimmy egg egg egg EGG FISH. egg jImMy egg-jimmy eg'g"
 
     # Placing individual words into fileInput list
-    # Use the commented one for strings
+    # Use the commented one for testing/raw strings
     fileInput = open(filename).read().split()
-    # fileInput = filename.split()
+    # testfileInput = testfilename.split()
     return fileInput
 
 
-# Makes list of lists that has the word and how many occurences it has
+# Makes dictionary that has the word and how many occurences it has
 def makeList(fileInput):
-    # Init
+    # List of things I want to capitalize
     capitalizethese = ('i')
     dictList = {}
+
     # Loops through every element in fileInput
-    # Removes any non alphanumeric; turns everything into lowercase
+    # Removes any non alphanumeric + turns word into lowercase
+    # Dictionary is {'word; amount of occurences'}
     for word in fileInput:
         word = re.sub('[^a-zA-Z\-]+', '', word).lower()
         if word in capitalizethese:
             word = word.capitalize()
-
-        # Check if already seen; if so, add 1 to occurences
-        # Second element is how many times the word has occurred already
         if word in dictList:
             dictList[word] += 1
-
-        # If not seen yet, create a new list within dictList
-        # First occurence means second element is "1" (see above)
         else:
             dictList[word] = 1
     return dictList
@@ -51,7 +46,6 @@ def makeList(fileInput):
 
 # Generates list based on probability and weights
 def probGen(dictList, inputLen, wordAmt):
-    # Finished list, the randomizer, and the number that goes up each time
     finishedList = []
     randomNum = random.random()
     accumulator = 0.0
@@ -69,16 +63,13 @@ def probGen(dictList, inputLen, wordAmt):
     finishedList[0] = finishedList[0].capitalize()
     return finishedList
 
-
 # Print function
 def printGen(finishedList):
-    # Removes all non-alphanumeric (mostly brackets and commas)
     print(' '.join(finishedList) + ".")
     return(' '.join(finishedList) + ".")
 
-
-# Everything is already histogram'd!
-# Made sure to sort it
+# Everything is already histogram'd
+# Sorted by the keys, from highest to lowest
 def histogram(dictList):
     histofile = open("histogram.txt", "w+")
     for value, key in sorted(dictList.items(), key=lambda s: s[1], reverse=True):
@@ -101,41 +92,43 @@ def frequency(word, dictList):
 
 @app.route('/')
 def main():
-    # start time!
     start_time = time.time()
-    # If you want a different file, see the grabFile function
+    # Grabs input + input length
     fileInput = grabFile()
     inputLen = len(fileInput)
     # Use input file; get dictionary of words+occurences
     dictList = makeList(fileInput)
-    # List based on probability!
-    # Also how long you want the string to be
+
+    # Grabs how long you want string to be; defaults to 10
     wordAmtInput = request.args.get('num', '')
     if wordAmtInput == '':
         wordAmt = 10
     else:
         wordAmt = int(wordAmtInput)
-    # wordAmt = int(request.args.get('num', ''))
-    # if wordAmt = '':
-    #     wordAmt = 10
+
+    # List based on probability
+    # Grabs list, length of dictionary, and desired string length
     finishedList = probGen(dictList, inputLen, wordAmt)
-    # Print!
+
     printGen(finishedList)
 
     # Word you want to search up for frequency; change as needed
     word = "the"
+
     # The three programs needed
     histogram(dictList)
     uniqueWords(inputLen)
     frequency(word.lower(), dictList)
-    # Timer!
+
     print("--- %s seconds ---" % (time.time() - start_time))
     return render_template('main.html', output=printGen(finishedList))
 
 
+# Redirects for other pages!
 @app.route('/<url>')
 def redirect(url):
     return render_template(url+'.html')
+
 
 if __name__ == "__main__":
     main()
