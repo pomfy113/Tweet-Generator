@@ -3,7 +3,7 @@ and, 3070
 I, 2994 
 of, 2776 
 to, 2760 
-a, 2683 
+a, 2681 
 in, 1815 
 that, 1750 
 it, 1710 
@@ -98,7 +98,6 @@ door, 140
 back, 138 
 room, 133 
 here, 131 
-, 128 
 face, 128 
 might, 126 
 just, 125 
@@ -462,7 +461,6 @@ eye, 24
 six, 24 
 steps, 24 
 because, 24 
-e, 24 
 rose, 24 
 next, 24 
 friends, 24 
@@ -745,7 +743,6 @@ engaged, 15
 to-day, 15 
 care, 15 
 slight, 15 
-s, 15 
 live, 15 
 says, 15 
 foot, 15 
@@ -1020,7 +1017,6 @@ fixed, 11
 opium, 11 
 ryder, 11 
 stoke, 11 
-f, 11 
 ebook, 10 
 english, 10 
 twisted, 10 
@@ -1183,6 +1179,7 @@ bowed, 9
 jabez, 9 
 anxious, 9 
 endeavoured, 9 
+4, 9 
 earth, 9 
 track, 9 
 fortune, 9 
@@ -1237,7 +1234,6 @@ cigar, 9
 shaking, 9 
 receive, 9 
 solution, 9 
-b, 9 
 star, 9 
 heavens, 9 
 bureau, 9 
@@ -1248,7 +1244,6 @@ stark, 9
 eyford, 9 
 pa, 9 
 including, 9 
--, 9 
 bachelor, 8 
 veil, 8 
 lodgings, 8 
@@ -1364,7 +1359,6 @@ proof, 8
 club, 8 
 bearing, 8 
 undoubtedly, 8 
-th, 8 
 web, 8 
 waterloo, 8 
 distance, 8 
@@ -1543,12 +1537,13 @@ particular, 7
 described, 7 
 ship, 7 
 laying, 7 
-c, 7 
+b, 7 
 sun, 7 
 river, 7 
 somewhere, 7 
 wifes, 7 
 grief, 7 
+1000, 7 
 boone, 7 
 downstairs, 7 
 supper, 7 
@@ -1573,6 +1568,7 @@ distributing, 7
 ebooks, 7 
 copies, 7 
 section, 7 
+-, 7 
 cost, 6 
 seldom, 6 
 reasoner, 6 
@@ -1786,7 +1782,6 @@ valuable, 6
 dressing-gown, 6 
 dream, 6 
 barred, 6 
-d, 6 
 places, 6 
 gasped, 6 
 kitchen, 6 
@@ -1931,6 +1926,7 @@ newspaper, 5
 check, 5 
 worked, 5 
 especially, 5 
+s, 5 
 willing, 5 
 vincent, 5 
 satisfied, 5 
@@ -2099,7 +2095,9 @@ aloysius, 5
 ceremony, 5 
 millar, 5 
 fowler, 5 
+1e1, 5 
 medium, 5 
+1f3, 5 
 replacement, 5 
 conan, 4 
 doyle, 4 
@@ -2231,7 +2229,6 @@ purely, 4
 ejaculated, 4 
 isnt, 4 
 pawnbrokers, 4 
-employ, 4 
 fourteen, 4 
 debts, 4 
 enormous, 4 
@@ -2390,7 +2387,6 @@ postmark, 4
 breakfast-table, 4 
 brass, 4 
 shows, 4 
-nd, 4 
 contents, 4 
 destroyed, 4 
 southern, 4 
@@ -2442,6 +2438,7 @@ shirt, 4
 exposure, 4 
 articles, 4 
 begging, 4 
+2, 4 
 pile, 4 
 commissionaire, 4 
 lining, 4 
@@ -2499,6 +2496,7 @@ drunk, 4
 skylight, 4 
 creating, 4 
 phrase, 4 
+1e8, 4 
 located, 4 
 displaying, 4 
 support, 4 
@@ -2697,6 +2695,7 @@ risk, 3
 comical, 3 
 roots, 3 
 pound, 3 
+30, 3 
 joke, 3 
 splash, 3 
 sinking, 3 
@@ -2850,6 +2849,7 @@ spotted, 3
 revealed, 3 
 characteristic, 3 
 wired, 3 
+1115, 3 
 ungrateful, 3 
 rummaged, 3 
 accounts, 3 
@@ -2860,7 +2860,7 @@ district, 3
 proprietor, 3 
 neighbouring, 3 
 june, 3 
-rd, 3 
+3rd, 3 
 crowder, 3 
 reeds, 3 
 border, 3 
@@ -2946,6 +2946,7 @@ signed, 3
 exposed, 3 
 objections, 3 
 ignorance, 3 
+90, 3 
 degree, 3 
 logical, 3 
 retain, 3 
@@ -2958,6 +2959,7 @@ awful, 3
 elias, 3 
 retire, 3 
 florida, 3 
+1869, 3 
 begged, 3 
 lumber-room, 3 
 foreign, 3 
@@ -2973,6 +2975,7 @@ enemy, 3
 drunken, 3 
 persuade, 3 
 foresee, 3 
+85, 3 
 vain, 3 
 senseless, 3 
 footmarks, 3 
@@ -2993,6 +2996,7 @@ derived, 3
 branches, 3 
 impunity, 3 
 movement, 3 
+c, 3 
 passers-by, 3 
 residence, 3 
 authorities, 3 
@@ -3082,6 +3086,7 @@ indoors, 3
 candle, 3 
 dazed, 3 
 cosmopolitan, 3 
+22nd, 3 
 dressing-table, 3 
 struggled, 3 
 recalled, 3 
@@ -3095,6 +3100,8 @@ bet, 3
 fowls, 3 
 bred, 3 
 whats, 3 
+6d, 3 
+100, 3 
 speedily, 3 
 slippers, 3 
 felony, 3 
@@ -3209,11 +3216,14 @@ derivative, 3
 obtain, 3 
 entity, 3 
 performing, 3 
+1e7, 3 
+1e9, 3 
 user, 3 
 royalty, 3 
 applicable, 3 
 donate, 3 
 payments, 3 
+3, 3 
 defective, 3 
 equipment, 3 
 disclaimer, 3 
@@ -3278,6 +3288,7 @@ exaggerated, 2
 amiss, 2 
 packet, 2 
 stiff, 2 
+e, 2 
 p, 2 
 t, 2 
 monogram, 2 
@@ -3467,9 +3478,12 @@ ezekiah, 2
 hopkins, 2 
 eligible, 2 
 fleet, 2 
+27, 2 
+1890, 2 
 assistants, 2 
 wages, 2 
 ideas, 2 
+employé, 2 
 employers, 2 
 faults, 2 
 rabbit, 2 
@@ -3560,6 +3574,7 @@ sad-faced, 2
 buttoning, 2 
 consequential, 2 
 deference, 2 
+30000, 2 
 grandfather, 2 
 brain, 2 
 introducing, 2 
@@ -3617,7 +3632,7 @@ yawning, 2
 commonplaces, 2 
 cest, 2 
 infinitely, 2 
-outr, 2 
+outré, 2 
 foreseen, 2 
 bald, 2 
 reports, 2 
@@ -3653,6 +3668,7 @@ superior, 2
 traveller, 2 
 impatient, 2 
 indulge, 2 
+60, 2 
 brings, 2 
 stole, 2 
 gasfitters, 2 
@@ -3754,6 +3770,7 @@ australia, 2
 colonies, 2 
 avoided, 2 
 mile, 2 
+employ, 2 
 patience, 2 
 picking, 2 
 flowers, 2 
@@ -3936,6 +3953,7 @@ register, 2
 repute, 2 
 politics, 2 
 opposing, 2 
+84, 2 
 outstretched, 2 
 scared, 2 
 nonsense, 2 
@@ -3950,9 +3968,11 @@ fluttered, 2
 diary, 2 
 headed, 2 
 notices, 2 
+4th, 2 
 mccauley, 2 
 paramore, 2 
 swain, 2 
+9th, 2 
 revenge, 2 
 perils, 2 
 elbows, 2 
@@ -3996,12 +4016,12 @@ captain, 2
 calhoun, 2 
 port, 2 
 february, 2 
+83, 2 
 badly, 2 
 atlantic, 2 
 college, 2 
 drenched, 2 
 mingled, 2 
---there, 2 
 self-control, 2 
 school, 2 
 timid, 2 
@@ -4039,6 +4059,7 @@ current, 2
 villas, 2 
 absurdly, 2 
 maybe, 2 
+10s, 2 
 counties, 2 
 remarking, 2 
 aberdeen, 2 
@@ -4201,6 +4222,7 @@ fiver, 2
 ate, 2 
 snapped, 2 
 numbers, 2 
+117, 2 
 noiseless, 2 
 daresay, 2 
 nearing, 2 
@@ -4431,6 +4453,7 @@ cravat, 2
 wardrobe, 2 
 card-case, 2 
 fragment, 2 
+2s, 2 
 sherry, 2 
 humble, 2 
 briskly, 2 
@@ -4504,6 +4527,7 @@ heh, 2
 settles, 2 
 offers, 2 
 fads, 2 
+120, 2 
 philadelphia, 2 
 jephro, 2 
 bradshaw, 2 
@@ -4537,7 +4561,10 @@ registered, 2
 redistribution, 2 
 promoting, 2 
 available, 2 
+1, 2 
 redistributing, 2 
+1c, 2 
+1e, 2 
 based, 2 
 references, 2 
 prominently, 2 
@@ -4562,6 +4589,7 @@ readable, 2
 widest, 2 
 computers, 2 
 created, 2 
+501c3, 2 
 exempt, 2 
 federal, 2 
 contributions, 2 
@@ -4571,7 +4599,12 @@ solicit, 2
 gutenbergs, 1 
 author, 1 
 posting, 1 
+18, 1 
+2011, 1 
+1661, 1 
 november, 1 
+29, 1 
+2002, 1 
 eclipses, 1 
 predominates, 1 
 sex, 1 
@@ -4610,7 +4643,7 @@ delicately, 1
 successfully, 1 
 activity, 1 
 readers, 1 
---i, 1 
+1888--i, 1 
 well-remembered, 1 
 silhouette, 1 
 clasped, 1 
@@ -4731,6 +4764,7 @@ rabbi, 1
 staff-commander, 1 
 deep-sea, 1 
 jersey, 1 
+1858, 1 
 contralto--hum, 1 
 la, 1 
 scala, 1 
@@ -4903,6 +4937,7 @@ yet--well, 1
 relapsed, 1 
 moody, 1 
 sardonic, 1 
+515, 1 
 continent, 1 
 hoarsely, 1 
 dismantled, 1 
@@ -4918,7 +4953,7 @@ antagonist, 1
 nest, 1 
 hindrance, 1 
 safeguard, 1 
-ne, 1 
+née, 1 
 woman--oh, 1 
 inviolate, 1 
 ring--, 1 
@@ -4992,6 +5027,7 @@ pennsylvania, 1
 u, 1 
 entitles, 1 
 twenty-one, 1 
+7, 1 
 wriggled, 1 
 scratch, 1 
 mopping, 1 
@@ -5074,6 +5110,7 @@ hammered, 1
 tack, 1 
 dissolved, 1 
 october, 1 
+9, 1 
 surveyed, 1 
 rueful, 1 
 overtopped, 1 
@@ -5083,6 +5120,7 @@ refreshingly, 1
 accountant, 1 
 ground-floor, 1 
 solicitor, 1 
+17, 1 
 manufactory, 1 
 artificial, 1 
 knee-caps, 1 
@@ -5219,12 +5257,13 @@ sufficed, 1
 doctor--as, 1 
 divined--in, 1 
 unpack, 1 
+2000, 1 
 layers, 1 
 foil, 1 
 justified, 1 
 screen, 1 
 partie, 1 
-carre, 1 
+carrée, 1 
 positions, 1 
 disadvantage, 1 
 shooting, 1 
@@ -5369,6 +5408,7 @@ windibank--that, 1
 father--took, 1 
 tidy, 1 
 wines, 1 
+4700, 1 
 goodwill, 1 
 rambling, 1 
 inconsequential, 1 
@@ -5376,6 +5416,7 @@ concentration, 1
 ned, 1 
 auckland, 1 
 zealand, 1 
+12, 1 
 per, 1 
 cent, 1 
 bargain, 1 
@@ -5416,6 +5457,7 @@ shilling, 1
 muff, 1 
 accurate, 1 
 saturdays, 1 
+31, 1 
 lyon, 1 
 angels, 1 
 travels, 1 
@@ -5427,6 +5469,7 @@ cloud-wreaths, 1
 infinite, 1 
 trite, 1 
 andover, 1 
+77, 1 
 hague, 1 
 unnoticed, 1 
 suggestiveness, 1 
@@ -5472,7 +5515,7 @@ tangle, 1
 unravel, 1 
 disappearing, 1 
 bedside, 1 
-dnouement, 1 
+dénouement, 1 
 recesses, 1 
 test-tubes, 1 
 pungent, 1 
@@ -5543,7 +5586,7 @@ disguise--the, 1
 travellers, 1 
 peculiarities, 1 
 tallied, 1 
-voil, 1 
+voilà, 1 
 persian, 1 
 taketh, 1 
 tiger, 1 
@@ -5612,7 +5655,7 @@ slovenly, 1
 illuminated, 1 
 inference, 1 
 therein, 1 
-mtier, 1 
+métier, 1 
 constabulary, 1 
 informing, 1 
 removing, 1 
@@ -5637,6 +5680,7 @@ warren, 1
 ensued, 1 
 becoming, 1 
 ungovernable, 1 
+150, 1 
 outcry, 1 
 expiring, 1 
 expired, 1 
@@ -5806,6 +5850,7 @@ limped--he, 1
 lame, 1 
 left-handedness, 1 
 enables, 1 
+140, 1 
 varieties, 1 
 rotterdam, 1 
 tip, 1 
@@ -5826,6 +5871,7 @@ jot, 1
 extremity, 1 
 incarnate, 1 
 blasted, 1 
+60s, 1 
 hot-blooded, 1 
 bush, 1 
 robber, 1 
@@ -5878,12 +5924,14 @@ defending, 1
 counsel, 1 
 prospect, 1 
 rests, 1 
+82, 1 
 qualities, 1 
 illustrate, 1 
 beginnings, 1 
 partially, 1 
 startling, 1 
 tempted, 1 
+87, 1 
 headings, 1 
 paradol, 1 
 mendicant, 1 
@@ -5955,11 +6003,13 @@ planter, 1
 fought, 1 
 jacksons, 1 
 hood, 1 
+1870, 1 
 sussex, 1 
 negroes, 1 
 franchise, 1 
 quick-tempered, 1 
 foul-mouthed, 1 
+1878, 1 
 sober, 1 
 backgammon, 1 
 draughts, 1 
@@ -5973,7 +6023,7 @@ keyhole, 1
 trunks, 1 
 bundles, 1 
 day--it, 1 
---a, 1 
+1883--a, 1 
 stamp, 1 
 colonels, 1 
 overtaken, 1 
@@ -5997,9 +6047,13 @@ sallies, 1
 green-scummed, 1 
 winced, 1 
 ado, 1 
+14000, 1 
 interposed, 1 
 reception, 1 
 supposed, 1 
+10, 1 
+1883, 1 
+2nd, 1 
 label, 1 
 memoranda, 1 
 receipts, 1 
@@ -6059,7 +6113,10 @@ destruction, 1
 helps, 1 
 ragged, 1 
 enigmatical, 1 
+7th, 1 
 augustine, 1 
+10th, 1 
+12th, 1 
 folding, 1 
 assert, 1 
 weave, 1 
@@ -6245,6 +6302,7 @@ slave, 1
 pasty, 1 
 pin-point, 1 
 pupils, 1 
+89--there, 1 
 needle-work, 1 
 linoleum, 1 
 dark-coloured, 1 
@@ -6297,6 +6355,7 @@ malay, 1
 berth, 1 
 unkempt, 1 
 twitter, 1 
+19th, 1 
 pipes--i, 1 
 kate--poor, 1 
 stupefying, 1 
@@ -6353,12 +6412,17 @@ somehow, 1
 thread, 1 
 concisely, 1 
 ago--to, 1 
+1884--there, 1 
+1887, 1 
 brewer, 1 
 companies, 1 
+514, 1 
 cannon, 1 
 thirty-seven, 1 
 temperate, 1 
 ascertain, 1 
+88, 1 
+220, 1 
 weighing, 1 
 earlier, 1 
 commissions, 1 
@@ -6367,6 +6431,7 @@ expecting, 1
 shipping, 1 
 shopping, 1 
 companys, 1 
+435, 1 
 second-floor, 1 
 describes, 1 
 irresistible, 1 
@@ -6432,7 +6497,8 @@ mud-bank, 1
 uncovered, 1 
 receded, 1 
 stuffed, 1 
-half-pennies--, 1 
+half-pennies--421, 1 
+270, 1 
 half-pennies, 1 
 eddy, 1 
 stripped, 1 
@@ -6569,8 +6635,11 @@ appropriate, 1
 ostensibly, 1 
 match-seller, 1 
 plied, 1 
+26s, 1 
+4d, 1 
 backed, 1 
 writ, 1 
+25, 1 
 fortnights, 1 
 creditor, 1 
 arduous, 1 
@@ -6582,6 +6651,7 @@ filling, 1
 keeper, 1 
 squalid, 1 
 transform, 1 
+700, 1 
 year--which, 1 
 takings--but, 1 
 repartee, 1 
@@ -6704,6 +6774,7 @@ background, 1
 aright, 1 
 smoothed, 1 
 doubled, 1 
+26, 1 
 upper-attendant, 1 
 solder, 1 
 casket, 1 
@@ -6715,6 +6786,8 @@ offence, 1
 played, 1 
 simplest, 1 
 recourse, 1 
+630, 1 
+221b, 1 
 concise, 1 
 mischance, 1 
 globe, 1 
@@ -6806,12 +6879,14 @@ grimly, 1
 greasy-backed, 1 
 finish, 1 
 suppliers, 1 
-road--, 1 
+road--249, 1 
 poultry, 1 
 supplier, 1 
 entry, 1 
 twenty-four, 1 
+7s, 1 
 underneath, 1 
+12s, 1 
 chagrined, 1 
 slab, 1 
 lamp-post, 1 
@@ -7081,6 +7156,9 @@ allowing, 1
 commons, 1 
 excursion, 1 
 total, 1 
+1100, 1 
+750, 1 
+250, 1 
 pittance, 1 
 dawdling, 1 
 eleys, 1 
@@ -7257,6 +7335,7 @@ clears, 1
 furnishes, 1 
 lapse, 1 
 weaken, 1 
+89, 1 
 summarise, 1 
 forgo, 1 
 steadily, 1 
@@ -7277,6 +7356,7 @@ suffering, 1
 inquiring, 1 
 side-table, 1 
 victor, 1 
+16a, 1 
 abode, 1 
 regret, 1 
 library-chair, 1 
@@ -7588,6 +7668,7 @@ azure, 1
 caltrops, 1 
 fess, 1 
 sable, 1 
+1846, 1 
 forty-one, 1 
 mature, 1 
 under-secretary, 1 
@@ -7769,7 +7850,10 @@ lured, 1
 riveted, 1 
 triumph, 1 
 oct, 1 
+8s, 1 
 cocktail, 1 
+1s, 1 
+8d, 1 
 drawled, 1 
 rival, 1 
 myth, 1 
@@ -7782,7 +7866,7 @@ lodging-house, 1
 mahogany, 1 
 brace, 1 
 pheasant, 1 
-pt, 1 
+pâté, 1 
 foie, 1 
 gras, 1 
 pie, 1 
@@ -7871,6 +7955,7 @@ northumberland, 1
 items, 1 
 duplicate, 1 
 forwarded, 1 
+226, 1 
 thither, 1 
 paternal, 1 
 mercifully, 1 
@@ -7923,6 +8008,7 @@ than--well, 1
 earth--one, 1 
 overwhelmed, 1 
 advancing, 1 
+50000, 1 
 borrow, 1 
 unwise, 1 
 parley, 1 
@@ -7968,6 +8054,7 @@ tender, 1
 late--forever, 1 
 suppressing, 1 
 box-room, 1 
+200, 1 
 generous, 1 
 farthing, 1 
 secure--a, 1 
@@ -8067,6 +8154,7 @@ ill-service, 1
 loving--mary, 1 
 excessive, 1 
 check-book, 1 
+4000, 1 
 triangular, 1 
 passionate, 1 
 hugged, 1 
@@ -8120,7 +8208,7 @@ vagabond, 1
 astute, 1 
 bluster, 1 
 life-preserver, 1 
-held--, 1 
+held--1000, 1 
 receiver, 1 
 promising, 1 
 chaffering, 1 
@@ -8131,7 +8219,7 @@ telegraph, 1
 lowliest, 1 
 manifestations, 1 
 prominence, 1 
-clbres, 1 
+célèbres, 1 
 trials, 1 
 figured, 1 
 synthesis, 1 
@@ -8241,6 +8329,7 @@ outbreak, 1
 solution--in, 1 
 good--too, 1 
 uneasy, 1 
+40, 1 
 danger--, 1 
 define, 1 
 sacrifice, 1 
@@ -8262,6 +8351,7 @@ studies, 1
 brief, 1 
 urgent, 1 
 midday, 1 
+1130, 1 
 acetones, 1 
 flecked, 1 
 exhilarating, 1 
@@ -8329,7 +8419,7 @@ vehemence, 1
 entire, 1 
 funniest, 1 
 humour, 1 
-rpertoire, 1 
+répertoire, 1 
 inimitably, 1 
 sideways, 1 
 chapter, 1 
@@ -8412,7 +8502,7 @@ hers, 1
 illness, 1 
 sacrificed, 1 
 hers--possibly, 1 
-fianc--and, 1 
+fiancé--and, 1 
 gaining, 1 
 tendencies, 1 
 converse, 1 
@@ -8473,9 +8563,9 @@ solely, 1
 mauritius, 1 
 manifested, 1 
 walsall, 1 
--txt, 1 
--zip, 1 
-httpwwwgutenbergorg, 1 
+1661-8txt, 1 
+1661-8zip, 1 
+httpwwwgutenbergorg1661661, 1 
 updated, 1 
 one--the, 1 
 renamed, 1 
@@ -8486,24 +8576,32 @@ modified, 1
 away--you, 1 
 commercial, 1 
 httpgutenbergnetlicense, 1 
+1a, 1 
 trademarkcopyright, 1 
 abide, 1 
+1b, 1 
 pglaf, 1 
 compilation, 1 
+1d, 1 
 govern, 1 
 countries, 1 
 constant, 1 
 downloading, 1 
 representations, 1 
 accessed, 1 
+1e2, 1 
 indicating, 1 
 charges, 1 
 appearing, 1 
+1e3, 1 
 imposed, 1 
+1e4, 1 
 unlink, 1 
 detach, 1 
+1e5, 1 
 display, 1 
 redistribute, 1 
+1e6, 1 
 convert, 1 
 binary, 1 
 nonproprietary, 1 
@@ -8515,6 +8613,7 @@ exporting, 1
 alternate, 1 
 include, 1 
 viewing, 1 
+20, 1 
 profits, 1 
 derive, 1 
 calculated, 1 
@@ -8528,6 +8627,8 @@ notifies, 1
 e-mail, 1 
 require, 1 
 discontinue, 1 
+1f, 1 
+1f1, 1 
 expend, 1 
 transcribe, 1 
 proofread, 1 
@@ -8541,6 +8642,7 @@ damaged, 1
 disk, 1 
 virus, 1 
 codes, 1 
+1f2, 1 
 disclaim, 1 
 remedies, 1 
 negligence, 1 
@@ -8551,10 +8653,12 @@ punitive, 1
 incidental, 1 
 elect, 1 
 opportunities, 1 
+1f4, 1 
 as-is, 1 
 express, 1 
 merchantibility, 1 
 fitness, 1 
+1f5, 1 
 disclaimers, 1 
 types, 1 
 violates, 1 
@@ -8564,6 +8668,7 @@ invalidity, 1
 unenforceability, 1 
 void, 1 
 provisions, 1 
+1f6, 1 
 indemnity, 1 
 indemnify, 1 
 employee, 1 
@@ -8582,6 +8687,7 @@ critical, 1
 gutenberg-tms, 1 
 goals, 1 
 ensuring, 1 
+2001, 1 
 sections, 1 
 httpwwwpglaforg, 1 
 non, 1 
@@ -8594,12 +8700,20 @@ internal, 1
 revenue, 1 
 ein, 1 
 identification, 1 
+64-6221541, 1 
 httppglaforgfundraising, 1 
 deductible, 1 
+4557, 1 
 melan, 1 
 fairbanks, 1 
 ak, 1 
+99712, 1 
+809, 1 
+1500, 1 
 ut, 1 
+84116, 1 
+801, 1 
+596-1887, 1 
 businesspglaforg, 1 
 gregory, 1 
 newby, 1 
@@ -8609,11 +8723,13 @@ survive, 1
 licensed, 1 
 accessible, 1 
 outdated, 1 
+5000, 1 
 maintaining, 1 
 irs, 1 
 regulating, 1 
 charities, 1 
 charitable, 1 
+50, 1 
 paperwork, 1 
 confirmation, 1 
 solicitation, 1 
@@ -8630,6 +8746,7 @@ donation, 1
 addresses, 1 
 checks, 1 
 httppglaforgdonate, 1 
+5, 1 
 professor, 1 
 originator, 1 
 network, 1 
