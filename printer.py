@@ -3,7 +3,7 @@
 
 def sentence_print(finished_list):
     """Print a sentence."""
-    return(' '.join(finished_list) + ".")
+    return(' '.join(finished_list).capitalize() + ".")
 
 
 def word_print(finished_word):

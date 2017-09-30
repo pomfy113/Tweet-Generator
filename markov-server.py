@@ -12,12 +12,24 @@ from listogram import Listogram
 
 # app = Flask(__name__)
 
+def next_word_loop(file_input, word, loops, final_list):
+    if loops == 0:
+        return final_list
+    word_search = re.sub('[^\w]', '', str(word))
+    new_list = Dictogram(re.findall(r'%s (\w*)' % word_search, file_input))
+    print(word, new_list)
+    new_word = probability_gen(new_list)
+    final_list.append(new_word)
+    next_word_loop(file_input, new_word, loops-1, final_list)
+
+    return final_list
 
 # @app.route('/')
 def main():
     """Start main process."""
     start_time = time.time()
     file_input = grab_file()
+    final_list = []
     # Grabs how long you want string to be for later; defaults to 10
     # output_len = request.args.get('num', '')
     # if output_len == '':
@@ -28,23 +40,19 @@ def main():
     # Grab the input, make into dictionary/list of words + occurences
     # Changed into a class for more functionality; trades speed though
 
-    # templist = []
-    input_histo = Listogram(file_input)
-    print(file_input)
-    for word in file_input:
+    input_histo = Dictogram(file_input)
+    first_word = probability_gen(input_histo)
+    final_list.append(first_word)
+    loops = 3
 
-        print(word, ' '.join(file_input))
-        cake = Dictogram(re.findall(r'%s (\w+)' % word, ' '.join(file_input)))
-        print(word, cake)
-
-
-
-    input_len = input_histo.tokens
+    joined_input = ' '.join(file_input)
+    finished_list = next_word_loop(joined_input, first_word, loops, final_list)
 
     # List based on probability
     # Grabs input, length of input, and desired string length
-    finished_list = probability_gen(input_histo, input_len)
-    # print(sentence_print(finished_list))
+    # finished_list = probability_gen(input_histo, input_len)
+    print(finished_list)
+    print(sentence_print(finished_list))
     # if word_amt == 1:
     #     word_print(finished_list)
     # else:

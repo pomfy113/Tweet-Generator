@@ -11,10 +11,7 @@ class Dictogram(dict):
 
     def update(self, iterable):
         """Update this histogram with the items in the given iterable."""
-        capitalize_these = ('i')
         for item in iterable:
-            if item in capitalize_these:
-                item = item.capitalize()
             if item in self:
                 self[item] += 1
             else:
