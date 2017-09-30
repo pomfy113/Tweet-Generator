@@ -1,4 +1,6 @@
 test = (("hello", "cake"), ("hungry", "pie"))
 
-if "hello" in test:
-    print("Got it")
+for word in test:
+    word = dict(test)
+
+print(word)
