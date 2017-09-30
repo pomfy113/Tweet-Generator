@@ -1,1 +1,1 @@
-web: gunicorn server:app
+web: gunicorn markov-server:app
