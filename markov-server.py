@@ -12,17 +12,20 @@ from listogram import Listogram
 
 app = Flask(__name__)
 
-def next_word_loop(file_input, word, loops, final_list):
+
+def markov_loop(file_input, input_histo, word, loops, final_list):
     """Markov maker; recursive, based on variable 'loop'."""
     if loops == 0:
         return final_list
-    word_search = re.sub('[^\w]', '', str(word))
-    new_list = Dictogram(re.findall(r'%s (\w*)' % word_search, file_input))
+    new_list = Dictogram(re.findall(r'%s (\w*)' % str(word), file_input))
+    while not bool(new_list):
+        new_list = Dictogram(input_histo)
     new_word = probability_gen(new_list)
     final_list.append(new_word)
-    next_word_loop(file_input, new_word, loops-1, final_list)
+    markov_loop(file_input, input_histo, new_word, loops-1, final_list)
 
     return final_list
+
 
 @app.route('/')
 def main():
@@ -43,21 +46,18 @@ def main():
     input_histo = Dictogram(file_input)
     first_word = probability_gen(input_histo)
     final_list.append(first_word)
-    loops -= 1
-
     # Markov begins; prints based probability of adjacent words
+    # loops - 1 because already did a word
     joined_input = ' '.join(file_input)
-    finished_list = next_word_loop(joined_input, first_word, loops, final_list)
+    finished_list = markov_loop(joined_input, input_histo, first_word, loops-1, final_list)
 
-
-    print(finished_list)
     print(sentence_print(finished_list))
 
     """Below are the three alternate functions not needed for the tweetgen."""
     # Word you want to search up for frequency; change as needed
     # word = "the"
 
-    # histogram(input_histo)
+    histogram(input_histo)
     # unique words... was replaced by dictogram
     # unique_words(input_histo.tokens)
     # input_histo.tokens
@@ -70,7 +70,7 @@ def main():
 
 @app.route('/<url>')
 def redirect(url):
-    """Redirects for other pages!"""
+    """Redirects for other pages."""
     return render_template(url+'.html')
 
 

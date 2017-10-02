@@ -1,6 +1,5 @@
 """Deals with making probabilities."""
 import random
-import time
 
 def probability_gen(input_histo):
     """Generate a word/sentence based on probability and weights."""
@@ -13,7 +12,7 @@ def probability_gen(input_histo):
 
 
 def dict_prob(input_histo):
-    """Do this is it's a histogram."""
+    """Do this if it's a histogram."""
     random_num = random.random()
     accumulator = 0.0
     for key, value in input_histo.items():
