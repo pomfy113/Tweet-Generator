@@ -17,7 +17,7 @@ def markov_loop(file_input, input_histo, word, loops, final_list):
     """Markov maker; recursive, based on variable 'loop'."""
     if loops == 0:
         return final_list
-    new_list = Dictogram(re.findall(r'%s (\w*)' % str(word), file_input))
+    new_list = Dictogram(re.findall(r'%s ([\w\'-]*)' % str(word), file_input))
     while not bool(new_list):
         new_list = Dictogram(input_histo)
     new_word = probability_gen(new_list)
@@ -44,12 +44,19 @@ def main():
     # Grab the input, make into dictionary/list of words + occurences
     # Using probability, grabs first word.
     input_histo = Dictogram(file_input)
+    print("--- %s seconds --- after initial Dictogram" % (time.time() - start_time))
+
     first_word = probability_gen(input_histo)
+    print("--- %s seconds --- after Stochastic" % (time.time() - start_time))
+
     final_list.append(first_word)
     # Markov begins; prints based probability of adjacent words
     # loops - 1 because already did a word
     joined_input = ' '.join(file_input)
+
     finished_list = markov_loop(joined_input, input_histo, first_word, loops-1, final_list)
+    print("--- %s seconds --- after Markov" % (time.time() - start_time))
+
 
     print(sentence_print(finished_list))
 
@@ -64,7 +71,8 @@ def main():
     # word frequency... also replaced
     # input_histo.count(word)
 
-    print("--- %s seconds --- end after frequency \n" % (time.time() - start_time))
+    print("--- %s seconds --- end total \n\n\n" % (time.time() - start_time))
+    print(input_histo.tokens)
     return render_template('main.html', output=sentence_print(finished_list))
 
 

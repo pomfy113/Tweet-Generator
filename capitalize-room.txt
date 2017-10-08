@@ -22,4 +22,6 @@ san
 francisco
 sausalito
 betty
-don
+harold
+friday
+canadian

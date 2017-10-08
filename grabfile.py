@@ -33,7 +33,7 @@ def room_service(filename):
     """Cleans 'The Room' script."""
     actions_removed = re.sub(r"(\(.*\))", '', filename)
     dialogue = re.findall(r"(?:\: (.*))", actions_removed)
-    # casing = re.sub(r"(?:[)\.?!\s] (\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), ' '.join(dialogue))
+    # asing = re.sub(r"(?:[)\.?!\s] (\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), ' '.join(dialogue))
     cleaned_text = re.findall(r"['\-\w]+", ' '.join(dialogue).lower())
     return(capitalize_check(cleaned_text))
 
@@ -43,6 +43,7 @@ def capitalize_check(text):
     for value, word in enumerate(text):
         if word in capitalize_these:
             text[value] = word.capitalize()
+    print(text)
     return text
 
 grab_file()

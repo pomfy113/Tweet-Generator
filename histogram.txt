@@ -603,7 +603,7 @@ doggy, 1
 favorite, 1 
 customer, 1 
 555-4828, 1 
-canadian, 1 
+Canadian, 1 
 bacon, 1 
 pineapple, 1 
 artichoke, 1 
@@ -635,10 +635,10 @@ pecs, 1
 wasted, 1 
 unhhh, 1 
 organizing, 1 
-friday, 1 
+Friday, 1 
 six, 1 
 jerk, 1 
-harold, 1 
+Harold, 1 
 share, 1 
 penny, 1 
 brother, 1 
