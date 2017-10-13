@@ -9,12 +9,14 @@ from printer import sentence_print, word_print
 from altfunctions import histogram
 from dictogram import Dictogram
 from listogram import Listogram
+from linkedlist import LinkedList
 
 app = Flask(__name__)
 
 
 def markov_loop(file_input, input_histo, word, loops, final_list):
     """Markov maker; recursive, based on variable 'loop'."""
+    print(word)
     if loops == 0:
         return final_list
     new_list = Dictogram(re.findall(r'%s ([\w\'-]*)' % str(word), file_input))
@@ -32,7 +34,9 @@ def main():
     """Start main process."""
     start_time = time.time()
     file_input = grab_file()
-    final_list = []
+    final_list = LinkedList()
+    joined_input = ' '.join(file_input[0])
+
 
     # Grabs how long you want string to be for later; defaults to 10
     output_len = request.args.get('num', '')
@@ -44,20 +48,29 @@ def main():
     # Grab the input, make into dictionary/list of words + occurences
     # Using probability, grabs first word.
     # Using only start tokens!
-    start_token_histo = Dictogram(file_input[0])
+    start_token_histo = Dictogram(file_input[1])
     print("--- %s seconds --- after initial Dictogram" % (time.time() - start_time))
 
     first_word = probability_gen(start_token_histo)
     print("--- %s seconds --- after Stochastic" % (time.time() - start_time))
 
     final_list.append(first_word)
+
+    new_list = Dictogram(re.findall(r'%s ([\w\'-]*)' % str(first_word), joined_input))
+    while not bool(new_list):
+        new_list = Dictogram(file_input[0])
+    second_word = probability_gen(new_list)
+    final_list.append(second_word)
+
+    print(final_list)
+    first_words = ' '.join(final_list.items())
+
     # Markov begins; prints based probability of adjacent words
     # loops - 1 because already did a word
-    joined_input = ' '.join(file_input[0])
 
     # input histogram for junk
     input_histo = Dictogram(file_input[0])
-    finished_list = markov_loop(joined_input, input_histo, first_word, loops-1, final_list)
+    finished_list = markov_loop(joined_input, input_histo, first_words, loops-1, final_list)
     print("--- %s seconds --- after Markov" % (time.time() - start_time))
 
     """Below are the three alternate functions not needed for the tweetgen."""
