@@ -16,7 +16,6 @@ def grab_file():
 
     file_input = room_service(file_open)
     # file_input = clean_up(file_input)
-
     return file_input
 
 # def clean_up(filename):
@@ -31,11 +30,19 @@ def grab_file():
 
 def room_service(filename):
     """Cleans 'The Room' script."""
-    actions_removed = re.sub(r"(\(.*\))", '', filename)
+    start_text = []
+    # removes all actions
+    actions_removed = re.sub(r"( \(.*\))", '', filename)
+    # only puts in dialogue
     dialogue = re.findall(r"(?:\: (.*))", actions_removed)
+    for strings in dialogue:
+        start_text.extend(re.findall(r"^[\w\-']+", strings))
+        start_text.extend(re.findall(r"[\.!?\"] ([\w\-']+)", strings))
     # asing = re.sub(r"(?:[)\.?!\s] (\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), ' '.join(dialogue))
-    cleaned_text = re.findall(r"['\-\w]+", ' '.join(dialogue).lower())
-    return(capitalize_check(cleaned_text))
+    regular_text = re.findall(r"['\-\w\,]+", ' '.join(dialogue).lower())
+    # print(start_text)
+    # print(start_text)
+    return(capitalize_check(regular_text), start_text)
 
 def capitalize_check(text):
     capitalize_input = "capitalize-room.txt"
@@ -43,7 +50,6 @@ def capitalize_check(text):
     for value, word in enumerate(text):
         if word in capitalize_these:
             text[value] = word.capitalize()
-    print(text)
     return text
 
 grab_file()

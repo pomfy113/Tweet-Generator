@@ -43,22 +43,22 @@ def main():
 
     # Grab the input, make into dictionary/list of words + occurences
     # Using probability, grabs first word.
-    input_histo = Dictogram(file_input)
+    # Using only start tokens!
+    start_token_histo = Dictogram(file_input[0])
     print("--- %s seconds --- after initial Dictogram" % (time.time() - start_time))
 
-    first_word = probability_gen(input_histo)
+    first_word = probability_gen(start_token_histo)
     print("--- %s seconds --- after Stochastic" % (time.time() - start_time))
 
     final_list.append(first_word)
     # Markov begins; prints based probability of adjacent words
     # loops - 1 because already did a word
-    joined_input = ' '.join(file_input)
+    joined_input = ' '.join(file_input[0])
 
+    # input histogram for junk
+    input_histo = Dictogram(file_input[0])
     finished_list = markov_loop(joined_input, input_histo, first_word, loops-1, final_list)
     print("--- %s seconds --- after Markov" % (time.time() - start_time))
-
-
-    print(sentence_print(finished_list))
 
     """Below are the three alternate functions not needed for the tweetgen."""
     # Word you want to search up for frequency; change as needed
