@@ -15,6 +15,10 @@ def grab_file():
     file_open = open(filename, encoding='utf8').read()
 
     file_input = room_service(file_open)
+
+    histofile = open("theroomcleanedup.txt", "w+")
+    histofile.write(' '.join(file_input[0]))
+    histofile.close()
     # file_input = clean_up(file_input)
     return file_input
 
@@ -42,7 +46,7 @@ def room_service(filename):
     regular_text = re.findall(r"['\-\w\,]+", ' '.join(dialogue).lower())
     # print(start_text)
     # print(start_text)
-    return(capitalize_check(regular_text), start_text)
+    return(regular_text, start_text)
 
 def capitalize_check(text):
     capitalize_input = "capitalize-room.txt"

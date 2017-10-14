@@ -14,64 +14,70 @@ from linkedlist import LinkedList
 app = Flask(__name__)
 
 
-def markov_loop(file_input, input_histo, word, loops, final_list):
+def markov_loop(file_input, input_histo, word, loops, word_linkedlist):
     """Markov maker; recursive, based on variable 'loop'."""
-    print(word)
+    """This is going to be a doozy, so keep a close eye on those comments."""
+
+    # For testing purposes
+    print("Linkedlist:", word_linkedlist)
+    # Return once we're out of loops
     if loops == 0:
-        return final_list
-    new_list = Dictogram(re.findall(r'%s ([\w\'-]*)' % str(word), file_input))
-    while not bool(new_list):
-        new_list = Dictogram(input_histo)
+        return word_linkedlist
+    # Combine
+    word = ' '.join(word_linkedlist.items())
+    print("Word being passed in:", word)
+    new_list = Dictogram(re.findall(r' %s ([\w\'-]*)' % str(word), file_input))
+    print(new_list)
+    if not new_list:
+        return word_linkedlist
     new_word = probability_gen(new_list)
-    final_list.append(new_word)
-    markov_loop(file_input, input_histo, new_word, loops-1, final_list)
+    word_linkedlist.append(new_word)
+    word_linkedlist.move()
+    markov_loop(file_input, input_histo, new_word, loops-1, word_linkedlist)
 
-    return final_list
+    return word_linkedlist
 
 
-@app.route('/')
+# @app.route('/')
 def main():
     """Start main process."""
     start_time = time.time()
     file_input = grab_file()
-    final_list = LinkedList()
+    word_linkedlist = LinkedList()
     joined_input = ' '.join(file_input[0])
 
 
+
+
     # Grabs how long you want string to be for later; defaults to 10
-    output_len = request.args.get('num', '')
-    if output_len == '':
-        loops = 10
-    else:
-        loops = int(output_len)
+    # output_len = request.args.get('num', '')
+    # if output_len == '':
+    loops = 10
+    # else:
+    #     loops = int(output_len)
 
-    # Grab the input, make into dictionary/list of words + occurences
-    # Using probability, grabs first word.
-    # Using only start tokens!
+    # START tokens.
     start_token_histo = Dictogram(file_input[1])
-    print("--- %s seconds --- after initial Dictogram" % (time.time() - start_time))
+    first_word = probability_gen(start_token_histo).lower()
+    word_linkedlist.append(first_word)
+    # Checking for the second word.
 
-    first_word = probability_gen(start_token_histo)
-    print("--- %s seconds --- after Stochastic" % (time.time() - start_time))
-
-    final_list.append(first_word)
-
-    new_list = Dictogram(re.findall(r'%s ([\w\'-]*)' % str(first_word), joined_input))
+    new_list = Dictogram(re.findall(r' %s ([\w\'-]*)' % str(first_word), joined_input))
+    print("Second word's dictogram:", first_word, new_list)
     while not bool(new_list):
         new_list = Dictogram(file_input[0])
     second_word = probability_gen(new_list)
-    final_list.append(second_word)
+    word_linkedlist.append(second_word)
 
-    print(final_list)
-    first_words = ' '.join(final_list.items())
+    print("Current linked list:", word_linkedlist)
+    first_words = ' '.join(word_linkedlist.items())
 
     # Markov begins; prints based probability of adjacent words
     # loops - 1 because already did a word
 
     # input histogram for junk
     input_histo = Dictogram(file_input[0])
-    finished_list = markov_loop(joined_input, input_histo, first_words, loops-1, final_list)
-    print("--- %s seconds --- after Markov" % (time.time() - start_time))
+    finished_list = markov_loop(joined_input, input_histo, first_words, loops-1, word_linkedlist)
 
     """Below are the three alternate functions not needed for the tweetgen."""
     # Word you want to search up for frequency; change as needed
@@ -86,7 +92,7 @@ def main():
 
     print("--- %s seconds --- end total \n\n\n" % (time.time() - start_time))
     print(input_histo.tokens)
-    return render_template('main.html', output=sentence_print(finished_list))
+    # return render_template('main.html', output=sentence_print(finished_list))
 
 
 @app.route('/<url>')

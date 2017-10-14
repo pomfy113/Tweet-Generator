@@ -1,5 +1,5 @@
 you, 447 
-I, 338 
+i, 338 
 to, 194 
 a, 127 
 don't, 121 
@@ -7,7 +7,7 @@ me, 98
 it, 94 
 the, 93 
 what, 88 
-I'm, 87 
+i'm, 87 
 and, 86 
 about, 80 
 have, 76 
@@ -19,7 +19,7 @@ of, 66
 you're, 63 
 just, 60 
 that, 58 
-Johnny, 56 
+johnny, 56 
 it's, 55 
 with, 54 
 not, 53 
@@ -39,20 +39,20 @@ can, 41
 like, 41 
 why, 41 
 in, 41 
-Lisa, 40 
+lisa, 40 
 get, 39 
 so, 36 
 how, 36 
 go, 34 
 what's, 34 
-Denny, 32 
+denny, 32 
 think, 32 
 talk, 32 
 right, 31 
 okay, 31 
 her, 31 
 up, 30 
-Mark, 30 
+mark, 30 
 we, 29 
 he's, 29 
 you,, 28 
@@ -103,7 +103,7 @@ mean, 15
 didn't, 15 
 really, 15 
 something, 14 
-I'll, 14 
+i'll, 14 
 will, 14 
 man,, 14 
 hey,, 13 
@@ -134,7 +134,7 @@ his, 11
 look,, 11 
 never, 11 
 she's, 11 
-Johnny's, 11 
+johnny's, 11 
 doesn't, 11 
 little, 10 
 hi,, 10 
@@ -180,7 +180,7 @@ girl, 7
 ha-ha, 7 
 gonna, 7 
 a-ha-ha, 7 
-I've, 7 
+i've, 7 
 always, 7 
 you've, 7 
 marry, 7 
@@ -508,7 +508,7 @@ bad, 2
 story,, 2 
 again, 2 
 friend,, 2 
-Betty, 2 
+betty, 2 
 bed, 2 
 beautiful,, 2 
 expert,, 2 
@@ -529,7 +529,7 @@ telling, 2
 honest, 2 
 excited, 2 
 awful, 2 
-Michelle, 2 
+michelle, 2 
 um, 2 
 shouldn't, 2 
 aren't, 2 
@@ -537,7 +537,7 @@ life,, 2
 goodnight,, 2 
 actually,, 2 
 making, 2 
-Claudette, 2 
+claudette, 2 
 of,, 2 
 book,, 2 
 pocket,, 2 
@@ -672,7 +672,7 @@ favorite, 1
 customer, 1 
 lot,, 1 
 555-4828, 1 
-Canadian, 1 
+canadian, 1 
 bacon, 1 
 pineapple,, 1 
 artichoke, 1 
@@ -710,10 +710,10 @@ tired,, 1
 wasted,, 1 
 unhhh, 1 
 organizing, 1 
-Friday, 1 
+friday, 1 
 six, 1 
 jerk, 1 
-Harold, 1 
+harold, 1 
 share, 1 
 penny, 1 
 brother, 1 
@@ -734,7 +734,7 @@ breast, 1
 cancer, 1 
 curing, 1 
 lots, 1 
-Edward, 1 
+edward, 1 
 hateful, 1 
 divorced, 1 
 concentrate, 1 
@@ -748,7 +748,7 @@ yum, 1
 delicious, 1 
 arms, 1 
 characters, 1 
-Michelle's, 1 
+michelle's, 1 
 boyfriend, 1 
 pleasure, 1 
 mm, 1 
@@ -778,7 +778,7 @@ forgot, 1
 my,, 1 
 book, 1 
 burglar,, 1 
-Chris-r, 1 
+chris-r, 1 
 coming,, 1 
 what'd, 1 
 swear, 1 
@@ -821,7 +821,7 @@ used, 1
 beat, 1 
 ended, 1 
 hospital, 1 
-Guerrero, 1 
+guerrero, 1 
 street, 1 
 lucky, 1 
 name, 1 
@@ -848,7 +848,7 @@ human, 1
 being,, 1 
 heart,, 1 
 other,, 1 
-Lisa's, 1 
+lisa's, 1 
 family,, 1 
 anytime, 1 
 elizabeth,, 1 
@@ -920,8 +920,8 @@ doctor, 1
 tough, 1 
 anytime,, 1 
 home,, 1 
-Shirley, 1 
-Hamilton, 1 
+shirley, 1 
+hamilton, 1 
 house,, 1 
 asked, 1 
 payment, 1 
@@ -993,8 +993,8 @@ guidelines, 1
 speaking, 1 
 how'd, 1 
 moved, 1 
-San, 1 
-Francisco, 1 
+san, 1 
+francisco, 1 
 suitcases, 1 
 have,, 1 
 ymca, 1 
@@ -1099,7 +1099,7 @@ examine, 1
 move, 1 
 table, 1 
 takeout, 1 
-Mark's, 1 
+mark's, 1 
 suddenly, 1 
 wide, 1 
 clearly, 1 
@@ -1113,7 +1113,7 @@ finish, 1
 number, 1 
 deserve, 1 
 offers, 1 
-Sausalito, 1 
+sausalito, 1 
 qualified, 1 
 late, 1 
 afternoon, 1 
