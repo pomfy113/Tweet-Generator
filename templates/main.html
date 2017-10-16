@@ -1,7 +1,8 @@
 <!doctype html>
 <head>
-<link rel="stylesheet" type="text/css" href="static/style.css">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/style.css">
 
 </head>
 <title>Tweet Generator</title>
@@ -12,4 +13,8 @@
   <li><a href="/favorites(WIP)">Favorites</a></li>
 </div>
 </ul>
-<div class="tweet"><h1>{{output}}</h1></div>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="tweet"><h1>{{output}}</h1></div>
+    </div>
+</div>

@@ -157,6 +157,22 @@ class LinkedList(object):
     def string_length(self):
         return len(self.stringify())
 
+    def room_tweet(self):
+        capitalize_input = "capitalize-room.txt"
+        capitalize_these = open(capitalize_input).read().split("\n")
+        text_list = self.items()
+
+        print(capitalize_these)
+        for value, word in enumerate(text_list):
+            if value is 0:
+                text_list[value] = word.capitalize()
+            if word in capitalize_these:
+                print("Capitalizing", word)
+                text_list[value] = word.capitalize()
+        print("textlist:", text_list)
+        return ' '.join(text_list).replace(" .", ".")
+
+
     def empty_list(self):
         self.head = None
         self.tail = None
