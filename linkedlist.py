@@ -167,10 +167,8 @@ class LinkedList(object):
             if value is 0:
                 text_list[value] = word.capitalize()
             if word in capitalize_these:
-                print("Capitalizing", word)
                 text_list[value] = word.capitalize()
-        print("textlist:", text_list)
-        return ' '.join(text_list).replace(" .", ".")
+        return ' '.join(text_list).replace(" .", ".").replace(" !", "!").replace(" ?", "?")
 
 
     def empty_list(self):

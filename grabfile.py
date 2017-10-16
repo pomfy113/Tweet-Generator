@@ -40,13 +40,13 @@ def room_service(filename):
     # remove weird [bla] stuff
     audibility = re.sub(r"(?:\[inaudible\]|\[incomprehensible\])", '', actions_removed)
     # create stop tokens
-    stop_tokens-period = re.sub(r"(\.|\!|\?)", ' [stop]', audibility)
-    # stop_tokens-excla = re.sub(r"(\!)", ' [stop-e]', audibility)
-    # stop_tokens-quest = re.sub(r"(\?)", ' [stop-q]', audibility)
+    stop_tokens_period = re.sub(r"(\.)", ' [stop-p]', audibility)
+    stop_tokens_excla = re.sub(r"(\!)", ' [stop-e]', stop_tokens_period)
+    stop_tokens_quest = re.sub(r"(\?)", ' [stop-q]', stop_tokens_excla)
 
 
     # only puts in dialogue
-    dialogue = re.findall(r"(?:\: (.*))", stop_tokens)
+    dialogue = re.findall(r"(?:\: (.*))", stop_tokens_quest)
     for strings in dialogue:
         start_text.extend(re.findall(r"^[\w\-']+", strings))
         start_text.extend(re.findall(r"[\.!?\"] ([\w\-']+)", strings))
