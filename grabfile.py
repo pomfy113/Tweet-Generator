@@ -40,7 +40,7 @@ def room_service(filename):
     # remove weird [bla] stuff
     audibility = re.sub(r"(?:\[inaudible\]|\[incomprehensible\])", '', actions_removed)
     # create stop tokens
-    stop_tokens = re.sub(r"(\.)", ' [STOP]', audibility)
+    stop_tokens = re.sub(r"(\.|\!|\?)", ' [STOP]', audibility)
     # only puts in dialogue
     dialogue = re.findall(r"(?:\: (.*))", stop_tokens)
     for strings in dialogue:
@@ -48,6 +48,8 @@ def room_service(filename):
         start_text.extend(re.findall(r"[\.!?\"] ([\w\-']+)", strings))
     # asing = re.sub(r"(?:[)\.?!\s] (\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), ' '.join(dialogue))
     regular_text = re.findall(r"[\[\]'\-\w\,]+", ' '.join(dialogue).lower())
+    print(regular_text)
+
     # print(start_text)
     # print(start_text)
     return(regular_text, start_text)

@@ -146,6 +146,22 @@ class LinkedList(object):
         if self.is_empty():
             self.tail = None
 
+    def empty_fix(self):
+        """If the list ends up being empty."""
+        self.tail = self.head
+        self.head.next = None
+
+    def stringify(self):
+        return ' '.join(self.items()).replace(" .", ".")
+
+    def string_length(self):
+        return len(self.stringify())
+
+    def empty_list(self):
+        self.head = None
+        self.tail = None
+        print(self.items(), "Clearing complete")
+        return
 
 def test_linked_list():
     ll = LinkedList()

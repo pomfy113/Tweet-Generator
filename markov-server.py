@@ -13,36 +13,72 @@ from linkedlist import LinkedList
 
 app = Flask(__name__)
 
+def markov_starter(start_token_list, joined_input, final_list, word_linkedlist):
+        infinite_stopper = 4
+        # START tokens.
+        start_token_histo = Dictogram(start_token_list)
+        first_word = probability_gen(start_token_histo).lower()
+        word_linkedlist.append(first_word)
+        final_list.append(first_word)
+        # Checking for the second word.
 
-def markov_loop(file_input, final_list, word, loops, word_linkedlist):
+        new_list = Dictogram(re.findall(r' %s ([\[\]\w\'\:\-\,]*)' % str(first_word), joined_input))
+        print("Second word's dictogram:", first_word, new_list)
+        second_word = probability_gen(new_list)
+
+        # Just don't want a two word sentence. Apparently three is fine.
+        while (second_word == '[stop]') or (second_word is None):
+            if infinite_stopper <= 0 or second_word is None:
+                final_list.append('.')
+                word_linkedlist.empty_list()
+                return markov_starter(start_token_list, joined_input, final_list, word_linkedlist)
+            print("NOT GONNA FLY, let's try again", second_word)
+            second_word = probability_gen(new_list)
+            infinite_stopper -= 1
+
+        word_linkedlist.append(second_word)
+        final_list.append(second_word)
+
+
+        print("Current linked list:", word_linkedlist)
+        return ' '.join(word_linkedlist.items())
+
+def markov_loop(file_input, final_list, loops, word_linkedlist):
     """Markov maker; recursive, based on variable 'loop'."""
     """This is going to be a doozy, so keep a close eye on those comments."""
-
+    if final_list.string_length() > 180:
+        print("A bit too long!")
+        return word_linkedlist
     # For testing purposes
-    print("Linkedlist:", word_linkedlist)
+    print("\n\nLinkedlist:", word_linkedlist)
+    print(final_list)
     # Return once we're out of loops
-    if loops == 0:
+    if loops is False:
         return word_linkedlist
     # Combine
     word = ' '.join(word_linkedlist.items())
     print("Word being passed in:", word)
-    new_list = Dictogram(re.findall(r' %s ([\[\]\w\'-\,]*)' % str(word), file_input))
+    new_list = Dictogram(re.findall(r' %s ([\[\]\w\'\:\-\,]*)' % str(word), file_input))
     print(new_list)
-    if not new_list:
-        return word_linkedlist
     new_word = probability_gen(new_list)
 
     if new_word == "[stop]":
         print("STOPPING")
         final_list.append('.')
-        loops = 0
+        loops = False
         return word_linkedlist
+
+    if new_word is None:
+        final_list.append('.')
+        loops = False
+        return word_linkedlist
+
 
     word_linkedlist.append(new_word)
     final_list.append(new_word)
 
     word_linkedlist.move()
-    markov_loop(file_input, final_list, new_word, loops-1, word_linkedlist)
+    markov_loop(file_input, final_list, loops, word_linkedlist)
 
     return word_linkedlist
 
@@ -52,46 +88,63 @@ def main():
     """Start main process."""
     start_time = time.time()
     file_input = grab_file()
-    word_linkedlist = LinkedList()
     joined_input = ' '.join(file_input[0])
+    start_token_list = file_input[1]
+
+    word_linkedlist = LinkedList()
     final_list = LinkedList()
+
+    tweet = ""
+
+    loops = 20
 
 
 
     # Grabs how long you want string to be for later; defaults to 10
     # output_len = request.args.get('num', '')
     # if output_len == '':
-    loops = 10
     # else:
     #     loops = int(output_len)
+    """This is here just in case."""
+        # # START tokens.
+        # start_token_histo = Dictogram(file_input[1])
+        # first_word = probability_gen(start_token_histo).lower()
+        # word_linkedlist.append(first_word)
+        # final_list.append(first_word)
+        # # Checking for the second word.
+        #
+        # new_list = Dictogram(re.findall(r' %s ([\[\]\w\'-\,]*)' % str(first_word), joined_input))
+        # print("Second word's dictogram:", first_word, new_list)
+        # second_word = probability_gen(new_list)
+        #
+        # # Just don't want a two word sentence. Apparently three is fine.
+        # while (second_word == '[stop]') or (second_word is None):
+        #     print("NOT GONNA FLY, let's try again", second_word)
+        #     second_word = probability_gen(new_list)
+        # word_linkedlist.append(second_word)
+        # final_list.append(second_word)
+        #
+        #
+        # print("Current linked list:", word_linkedlist)
+        # first_words = ' '.join(word_linkedlist.items())
 
-    # START tokens.
-    start_token_histo = Dictogram(file_input[1])
-    first_word = probability_gen(start_token_histo).lower()
-    word_linkedlist.append(first_word)
-    final_list.append(first_word)
-    # Checking for the second word.
+        # Markov begins; prints based probability of adjacent words
+        # loops - 1 because already did a word
 
-    new_list = Dictogram(re.findall(r' %s ([\[\]\w\'-\,]*)' % str(first_word), joined_input))
-    print("Second word's dictogram:", first_word, new_list)
-    while not bool(new_list):
-        new_list = Dictogram(file_input[0])
-    second_word = probability_gen(new_list)
-    word_linkedlist.append(second_word)
-    final_list.append(second_word)
+        # input histogram for junk
 
+    while len(tweet) < 100:
+        markov_starter(start_token_list, joined_input, final_list, word_linkedlist)
+        markov_loop(joined_input, final_list, loops, word_linkedlist)
+        if len(tweet) + final_list.string_length() < 180:
+            tweet += final_list.stringify()
+            print("* * * \nTWEET HAS BEEN ACCEPTED\n* * *")
+        print("* * * \nEMPTYING\n* * *")
 
-    print("Current linked list:", word_linkedlist)
-    first_words = ' '.join(word_linkedlist.items())
+        word_linkedlist.empty_list()
+        final_list.empty_list()
 
-    # Markov begins; prints based probability of adjacent words
-    # loops - 1 because already did a word
-
-    # input histogram for junk
-
-    markov_loop(joined_input, final_list, first_words, loops-1, word_linkedlist)
-    final_list2 = capitalize_check(final_list.items())
-    print((' '.join(final_list2)).replace(" .", "."))
+    print(tweet)
 
 
     """Below are the three alternate functions not needed for the tweetgen."""
