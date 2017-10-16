@@ -12,7 +12,9 @@ from dictogram import Dictogram
 from listogram import Listogram
 from linkedlist import LinkedList
 
+
 app = Flask(__name__)
+
 
 def stop_checker(stopstring, final_list):
     if stopstring == '[stop-p]':
@@ -39,7 +41,7 @@ def markov_starter(start_token_list, joined_input, final_list, word_linkedlist):
         second_word = probability_gen(new_list)
 
         # Just don't want a two word sentence. Apparently three is fine.
-        while (second_word == '[stop-p]' or second_word == '[stop-q]' or second_word == '[stop-e]') or (second_word is None):
+        while (second_word in {'[stop-p]', '[stop-q]', '[stop-e]'}) or (second_word is None):
             if infinite_stopper <= 0 or second_word is None:
                 stop_checker(second_word, final_list)
                 word_linkedlist.empty_list()
@@ -72,7 +74,7 @@ def markov_loop(file_input, final_list, loops, word_linkedlist):
     print(new_list)
     new_word = probability_gen(new_list)
 
-    if new_word == '[stop-p]' or new_word == '[stop-q]' or new_word == '[stop-e]':
+    if new_word in {'[stop-p]', '[stop-q]', '[stop-e]'}:
         print("STOPPING")
         stop_checker(new_word, final_list)
         loops = False
@@ -145,10 +147,10 @@ def main():
 
     print("--- %s seconds --- end total \n\n\n" % (time.time() - start_time))
     # print(input_histo.tokens)
-    return render_template('main.html', output=tweet)
+    return render_template('main.html', output=tweet, time=time.time())
 
 
-# @app.route('/<url>')
+@app.route('/<url>')
 def redirect(url):
     """Redirects for other pages."""
     return render_template(url+'.html')

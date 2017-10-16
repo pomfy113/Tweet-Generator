@@ -1,3 +1,5 @@
+url_for('static', filename='style.css')
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -23,10 +25,74 @@ li a:hover {
 
 .navbar{
     color: black;
+    background-color: black;
 }
 
 .tweet{
+    font-family: impact;
     margin-top: 50px;
     text-align: center;
     color: black;
+    background-color: white;
+}
+
+body{
+    background-image: url('../static/images/background.jpg');
+    background-size: 20%;
+    cursor: url('../static/images/johnny.png'), auto;
+}
+
+.rainbow {
+   /* Chrome, Safari, Opera */
+  -webkit-animation: rainbow 1s infinite;
+
+  /* Internet Explorer */
+  -ms-animation: rainbow 1s infinite;
+
+  /* Standar Syntax */
+  animation: rainbow 1s infinite;
+}
+
+
+
+.balloon{
+    position: absolute;
+    z-index: -1;
+
+    width: 100px;
+    animation-name: balloon;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes balloon{
+    from{margin-top:0%}
+    to{margin-top:90%}
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+	20%{color: red;}
+	40%{color: yellow;}
+	60%{color: green;}
+	80%{color: blue;}
+	100%{color: orange;}
+}
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+	20%{color: red;}
+	40%{color: yellow;}
+	60%{color: green;}
+	80%{color: blue;}
+	100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+	20%{color: red;}
+	40%{color: yellow;}
+	60%{color: green;}
+	80%{color: blue;}
+	100%{color: orange;}
 }

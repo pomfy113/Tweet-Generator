@@ -2,9 +2,18 @@
 <head>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="static/style.css">
+<link rel="stylesheet" type="text/css" href="static/style.css?time={{time}}">
+
+<style>
+/*body{
+background-image: url('../static/images/background.jpg');
+}*/
+</style>
 
 </head>
+<img src="../static/images/balloon.png" class="balloon">
+
+<audio src="../static/sounds/OhHiMark.mp3" autoplay></audio>
 <title>Tweet Generator</title>
 <div class="navbar">
 <ul>
@@ -13,8 +22,18 @@
   <li><a href="/favorites(WIP)">Favorites</a></li>
 </div>
 </ul>
+
 <div class="row justify-content-center">
     <div class="col-8">
         <div class="tweet"><h1>{{output}}</h1></div>
     </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <img src="../static/images/giphy.gif">
+        <img src="../static/images/giphy2.gif">
+        <img src="../static/images/giphy.gif">
+    </div>
+    <div class="col-2"><br><h2 class="rainbow">BEST TWEETGEN 2017</h2></div>
 </div>
