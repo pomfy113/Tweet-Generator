@@ -44,21 +44,21 @@ body{
 
 .rainbow {
    /* Chrome, Safari, Opera */
-  -webkit-animation: rainbow 1s infinite;
+   font-size: 100px;
+   font-style: oblique;
+   font-weight: bold;
+  -webkit-animation: rainbow 1s infinite, shakey 1s infinite;
 
   /* Internet Explorer */
-  -ms-animation: rainbow 1s infinite;
+  -ms-animation: rainbow 1s infinite, shakey 1s infinite;
 
   /* Standar Syntax */
-  animation: rainbow 1s infinite;
+  animation: rainbow 1s infinite, shakey 1s infinite;
 }
-
-
 
 .balloon{
     position: absolute;
     z-index: -1;
-
     width: 100px;
     animation-name: balloon;
     animation-duration: 3s;
@@ -66,33 +66,72 @@ body{
     animation-timing-function: linear;
 }
 
+.dog{
+    position: absolute;
+    animation-name: shakey;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.football{
+    position: absolute;
+    z-index: -1;
+    animation-name: football;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+
+}
+
+.spoon{
+    position: absolute;
+    z-index: -1;
+    height: 200px;
+    animation-name: spoon;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+}
+
+@keyframes spoon {
+    from{margin-left: 0%; transform: rotate(0deg);}
+    to{margin-left: 100%;; transform: rotate(360deg);}
+}
+/* BALLOONS */
 @keyframes balloon{
-    from{margin-top:0%}
-    to{margin-top:90%}
+    from{margin-top:-1000%}
+    to{margin-top:0%}
+}
+/* FOOTBALL */
+@keyframes football{
+    from{margin-left: 0%; transform: rotate(0deg);}
+    to{margin-left: 100%; transform: rotate(360deg);}
 }
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes rainbow{
-	20%{color: red;}
-	40%{color: yellow;}
-	60%{color: green;}
-	80%{color: blue;}
-	100%{color: orange;}
-}
-/* Internet Explorer */
-@-ms-keyframes rainbow{
-	20%{color: red;}
-	40%{color: yellow;}
-	60%{color: green;}
-	80%{color: blue;}
-	100%{color: orange;}
-}
 
-/* Standar Syntax */
+/* Standard Syntax */
 @keyframes rainbow{
 	20%{color: red;}
 	40%{color: yellow;}
 	60%{color: green;}
 	80%{color: blue;}
 	100%{color: orange;}
+}
+
+
+@keyframes shakey {
+	0% { transform: translate(20px, 10px) rotate(0deg); }
+	10% { transform: translate(-10px, -20px) rotate(-20deg); }
+	20% { transform: translate(-30px, 0px) rotate(20deg); }
+	30% { transform: translate(0px, 20px) rotate(0deg); }
+	40% { transform: translate(10px, -10px) rotate(20deg); }
+	50% { transform: translate(-10px, 20px) rotate(-20deg); }
+	60% { transform: translate(-30px, 10px) rotate(0deg); }
+	70% { transform: translate(20px, 10px) rotate(-20deg); }
+	80% { transform: translate(-10px, -10px) rotate(20deg); }
+	90% { transform: translate(20px, 20px) rotate(0deg); }
+	100% { transform: translate(10px, -20px) rotate(-20deg); }
 }
