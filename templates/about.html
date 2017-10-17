@@ -1,0 +1,81 @@
+<!doctype html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<title>More Info</title>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+  <a class="navbar-brand" href="/">Welcome to The Room</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Reload</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-4" style="background-color: white; border-radius: 30px; margin: 10px; padding: 30px;">
+    <h1>Welcome to my tweetgen!</h1>
+    <p>
+    Email: <a href="https://github.com/pomfy113">pomfy113@gmail.com</a> <br>
+    Github: <a href="https://github.com/pomfy113">Pomfy113</a>
+    </p>
+    <p>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-8" style="background-color: white; border-radius: 30px; margin: 10px; padding: 30px;">
+    <h2>About/FAQ:</h2>
+        <h3>Why?</h3>
+            <p>
+                To see how far I can possibly go. If I was going to make
+                something about a "so bad, it's good" movie, why not go all out?
+            </p>
+        <h3>No, I mean what was the purpose of this?</h3>
+            <p>
+                Mostly to showcase what I learned in a basic CS class.
+                Sure, the site looks ugly as sin and looks like it took work,
+                but most of it actually came from what's going on in the back.
+            </p>
+        <h3>Like...?</h3>
+            <p>For stuff I did:
+                <ul>
+                <li>
+                    It uses a basic 2nd order
+                    <a href="https://en.wikipedia.org/wiki/Markov_chain" style="">Markov Chain</a>
+                    So what this basically means is that it grabs two words, then looks
+                    ahead and goes "Oh, what word is likely to show up afterwards".
+                </li>
+                <li>
+                    Under the hood is a whole slew of regular expressions. Most if
+                    not all of the work being done are actually regex! They do stuff like:
+                    <ul><li>Clear out all non-dialogue</li>
+                        <li>Handle stop tokens, like periods, exclamations, and question marks</li>
+                        <li>Remove misc notes, like [inaudible] or [incomprehensible] sounds.</li>
+                        <li>Handle word searching and replacement</li>
+                        <li>Clean-up and slicing things into a list of words to use</li>
+                        <li>Likely more things I might have forgotten</li>
+                    </ul>
+                </li>
+                <li>
+                    Linked lists and stochastic sampling to handle this mess.
+                    There's a queue that handles the two words like, say, if you had:<br>
+                    "one fish red fish one fish blue fish one fish blue fish"<br>
+                    And you get<br>
+                    ["one", "fish"]<br>
+                    We notice that on the list that after those two words in order,
+                    "red" appears one time, and "blue" happens twice.<br>
+                    So we roll a three sided dice. "Red" has a 1/3 chance, "Blue" has a 2/3
+                </li>
+
+
+
+            </p>
+    </div>
+</div>

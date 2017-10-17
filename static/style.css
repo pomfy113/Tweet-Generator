@@ -1,6 +1,6 @@
 url_for('static', filename='style.css')
-
-ul {
+/* NAVBAR STUFF */
+.navbar > ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -8,18 +8,18 @@ ul {
     background-color: #666;
 }
 
-li {
+.navbar > li {
     float: left;
 }
 
-li a {
+.navbar > li a {
     display: block;
     color: white;
     padding: 14px 16px;
     text-decoration: none;
 }
 
-li a:hover {
+.navbar > li a:hover {
     background-color: #222;
 }
 
@@ -27,7 +27,7 @@ li a:hover {
     color: black;
     background-color: black;
 }
-
+/* NAVBAR STUFF END */
 .tweet{
     font-family: impact;
     margin-top: 50px;
