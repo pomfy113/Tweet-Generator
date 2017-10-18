@@ -43,8 +43,6 @@ def room_service(filename):
     stop_tokens_period = re.sub(r"(\.)", ' [stop-p]', audibility)
     stop_tokens_excla = re.sub(r"(\!)", ' [stop-e]', stop_tokens_period)
     stop_tokens_quest = re.sub(r"(\?)", ' [stop-q]', stop_tokens_excla)
-
-
     # only puts in dialogue
     dialogue = re.findall(r"(?:\: (.*))", stop_tokens_quest)
     for strings in dialogue:
@@ -56,6 +54,7 @@ def room_service(filename):
     # print(start_text)
     # print(start_text)
     return(regular_text, start_text)
+
 
 def capitalize_check(text):
     capitalize_input = "capitalize-room.txt"
