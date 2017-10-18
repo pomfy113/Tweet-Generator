@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Reload <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
@@ -23,7 +23,9 @@
     </ul>
 </div>
 </nav>
-
+<!-- I wanna cut the entire thing in 3/4ths. -->
+<div class="row">
+<div class="col-9">
 <!-- It's a spoon -->
 <img src="../static/images/spoon.png" class="spoon">
 
@@ -32,6 +34,7 @@
     <div class="col-8">
         <div class="tweet"><h1>{{output}}</h1></div>
     </div>
+
 </div>
 <div class="row justify-content-center">
     <form action="/tweet" method="post">
@@ -45,10 +48,12 @@
 
 <!-- Wiseau images -->
 <div class="row justify-content-center">
-    <div class="col-10">
-        <img src="../static/images/giphy.gif" style="width: 30%;">
-        <img src="../static/images/giphy2.gif" style="width: 30%;">
-        <img src="../static/images/giphy.gif" style="width: 30%;">
+    <div class="col-8">
+        <div class="justify-content: center;">
+            <img src="../static/images/giphy.gif" style="width: 30%;">
+            <img src="../static/images/giphy2.gif" style="width: 30%;">
+            <img src="../static/images/giphy.gif" style="width: 30%;">
+        </div>
     </div>
 </div>
 
@@ -95,6 +100,21 @@
 <!-- It's text -->
 <br><br>
 <p style="color=white;">I did not hit her</p>
+
+<!-- To end the ORIGINAL 3/4th column -->
+</div>
+<!-- Next 1/4th-->
+<!-- Here's the tweets-->
+<div class="col-3">
+        <div style="margin: 20px;">
+            <a class="twitter-timeline" data-width="300" data-height="600" data-theme="dark"
+            data-link-color="#2B7BB9" href="https://twitter.com/room_tweetgen?ref_src=twsrc%5Etfw">
+            Tweets by room_tweetgen</a>
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+</div>
+<!-- Final div for the row (top of page) -->
+</div>
 
 <script>
 var greet = document.getElementById("greeting");
