@@ -51,8 +51,7 @@ def markov_loop(markov_table, window_queue, temp_tweet):
     temp_tweet.append(first_words[1])
 
     # Pass in function; should return a word (see above function)
-    window_items = markov_table.get(window_queue.items())
-    new_word = probability_gen(markov_table.get(window_items))
+    new_word = probability_gen(markov_table.get(window_queue.items()))
 
     # While it's not a stop token, let's keep generating words!
     while new_word not in {'[stop-p]', '[stop-q]', '[stop-e]', '[stop-eq]', None}:
@@ -62,8 +61,8 @@ def markov_loop(markov_table, window_queue, temp_tweet):
         # To add to the sentence we'll test
         temp_tweet.append(new_word)
         # New word using probability generator
-        window_items = markov_table.get(window_queue.items())
-        new_word = probability_gen(markov_table.get(window_items))
+        new_word = probability_gen(markov_table.get(window_queue.items()))
+
     # End of the line! No need to return things due to linked list!
     temp_tweet.append(stop_checker(new_word))
     return
@@ -132,25 +131,32 @@ def main():
 
 @app.route('/')
 def tweetthis():
+    """Generate a sentence. Preloaded."""
+    # This is from the initial load
     global markov_full_table
     markov_walked = markov_full_table
-    start_time = time.time()
 
+    # Initializing the Markov Window and the tweet that we'll checks
+    # Currently we check the size
     window_queue = LinkedList()
-
     temp_tweet = LinkedList()
     last_tweet = ""
+    # Let's get a 25% chance of stopping a tweet immediately
+    RNG = 4
 
-    while(len(last_tweet) < 60):
-        print("Current window:", window_queue)
-        print("Current length:", len(last_tweet))
+    while(len(last_tweet) < 60) and (RNG != 0):
+        # Here's the markov!
         markov_loop(markov_walked, window_queue, temp_tweet)
-        if temp_tweet.string_length() + len(last_tweet) < 120:
+        # If good length, add to main tweet!
+        if temp_tweet.string_length() + len(last_tweet) <= 120:
             last_tweet += temp_tweet.room_tweet() + " "
+        # Otherwise, throw it away
         window_queue.empty_list()
         temp_tweet.empty_list()
+        # Roll that dice!
+        RNG = random.randint(0, 4)
+        print(RNG)
     print("Final tweet:", last_tweet)
-    print("--- %s seconds --- markov done \n\n\n" % (time.time() - start_time))
 
     return render_template('main.html', output=last_tweet)
 
@@ -168,18 +174,17 @@ def tweetthis():
     # word frequency... also replaced
     # input_histo.count(word)
 
-    print("--- %s seconds --- end total \n\n\n" % (time.time() - start_time))
     # print(input_histo.tokens)
     # return render_template('main.html', output=tweet, time=time.time())
 
 @app.route('/')
 
-# @app.route('/about')
+@app.route('/about')
 def about():
     """Redirects for other pages."""
     return render_template('about.html')
 
-# @app.route('/tweet', methods=['POST'])
+@app.route('/tweet', methods=['POST'])
 def tweet():
     status = request.form['sentence']
     twitter.tweet(status)
