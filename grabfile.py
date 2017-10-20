@@ -7,53 +7,32 @@ def grab_file():
     # Please use a relative path if uploading online!
     filename = "theroom.txt"
     # Placing individual words into file_input list
-    # file_input = re.findall(r"(?:['\-\w]{2,}|[Ia])", open(filename).read())
-    # Test string and the print for it; use if you want to have a raw string
-    # testfilename = "egg fish fish Jimmy EGG FISH. jImMy egg-jimmy eg'g Mr. egg"
-    # testfilename = "one fish two fish red fish blue cake fish blue"
-    # file_input = testfilename.split()
+
     file_open = open(filename, encoding='utf8').read()
 
     file_input = room_service(file_open)
 
     histofile = open("theroomcleanedup.txt", "w+")
-    histofile.write(' '.join(file_input[0]))
+    histofile.write(' '.join(file_input))
     histofile.close()
     # file_input = clean_up(file_input)
     return file_input
 
-# def clean_up(filename):
-#     """Cleans up the file. Very regex heavy."""
-#
-#     # Casing: for now, checks after punctuations, beginning of newlines, quotes,
-#     # Makes those non-capitalized
-#     casing = re.sub(r"(?:[\.?!\s] (\w*)|\"(\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), filename)
-#
-#     # find function; puts it all into a list
-#     return re.findall(r"(?:['\-\w]{2,}|[Ia])", casing)
-
 def room_service(filename):
     """Cleans 'The Room' script."""
-    start_text = []
     # removes all actions
     actions_removed = re.sub(r"( \(.*\))", '', filename)
     # remove weird [bla] stuff
     audibility = re.sub(r"(?:\[inaudible\]|\[incomprehensible\])", '', actions_removed)
     # create stop tokens
-    stop_tokens_period = re.sub(r"(\.)", ' [stop-p]', audibility)
-    stop_tokens_excla = re.sub(r"(\!)", ' [stop-e]', stop_tokens_period)
-    stop_tokens_quest = re.sub(r"(\?)", ' [stop-q]', stop_tokens_excla)
+    stop_tokens_period = re.sub(r"(\.)", ' [stop-p] [start]', audibility)
+    stop_tokens_excla = re.sub(r"(\!)", ' [stop-e] [start]', stop_tokens_period)
+    stop_tokens_quest = re.sub(r"(\?)", ' [stop-q] [start]', stop_tokens_excla)
     # only puts in dialogue
     dialogue = re.findall(r"(?:\: (.*))", stop_tokens_quest)
-    for strings in dialogue:
-        start_text.extend(re.findall(r"^[\w\-']+", strings))
-        start_text.extend(re.findall(r"[\.!?\"] ([\w\-']+)", strings))
-    # asing = re.sub(r"(?:[)\.?!\s] (\w*)|\n(\w*)|^(\w*))", lambda s: s.group(0).lower(), ' '.join(dialogue))
     regular_text = re.findall(r"[\[\]'\-\w\,]+", ' '.join(dialogue).lower())
 
-    # print(start_text)
-    # print(start_text)
-    return(regular_text, start_text)
+    return(regular_text)
 
 
 def capitalize_check(text):

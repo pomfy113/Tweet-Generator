@@ -40,7 +40,7 @@ class LinkedList(object):
         while current is not None:
             result.append(current.data)
             current = current.next
-        return result
+        return tuple(result)
 
     def is_empty(self):
         """Return True if this linked list is empty, or False"""
@@ -162,7 +162,6 @@ class LinkedList(object):
         capitalize_these = open(capitalize_input).read().split("\n")
         text_list = self.items()
 
-        print(capitalize_these)
         for value, word in enumerate(text_list):
             if value is 0:
                 text_list[value] = word.capitalize()
@@ -174,7 +173,6 @@ class LinkedList(object):
     def empty_list(self):
         self.head = None
         self.tail = None
-        print(self.items(), "Clearing complete")
         return
 
 def test_linked_list():

@@ -6,6 +6,7 @@ import random
 from grabfile import grab_file
 # from cleanup import get_dictionary
 from probability import probability_gen
+from listogram import Listogram
 from dictogram import Dictogram
 from linkedlist import LinkedList
 import twitter
@@ -56,7 +57,7 @@ def markov_starter(start_token_list, joined_input, final_list, word_linkedlist):
 
         return ' '.join(word_linkedlist.items())
 
-
+# TO-DO: Rename variables
 def markov_loop(file_input, final_list, loops, word_linkedlist):
     """Markov maker; recursive, based on variable 'loop'."""
     """This is going to be a doozy, so keep a close eye on those comments."""
@@ -66,9 +67,12 @@ def markov_loop(file_input, final_list, loops, word_linkedlist):
     # Return once we're out of loops
     if loops is False:
         return word_linkedlist
+
     # Combine window before passing it into regex findall
     word = ' '.join(word_linkedlist.items())
-    new_list = Dictogram(re.findall(r' %s ([\[\]\w\'\:\-\,]*)' % str(word), file_input))
+    pattern = r' %s ([\[\]\w\'\:\-\,]*)' % str(word)
+    following_words = re.findall(pattern, file_input)
+    new_list = Dictogram(following_words)
     new_word = probability_gen(new_list)
 
     # if stop token, then do the stop-check to punctuate properly
@@ -97,36 +101,72 @@ def room_capitalize(text):
             text[value] = word.capitalize()
     return text
 
-@app.route('/')
+def markov_generator(corpus_text):
+    corpus_text = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'fish', 'two']
+    corpus_ll = LinkedList(corpus_text)
+    window_queue = LinkedList()
+    current_dict = Dictogram()
+
+    window_queue.append(corpus_text[0])
+    window_queue.append(corpus_text[1])
+    current_dict.update([window_queue.items()])
+    current_dict[window_queue.items()] = Dictogram()
+    current_dict[window_queue.items()].update([corpus_text[2]])
+
+
+    for i in range(corpus_ll.length()-2):
+        window_queue.move()
+        window_queue.append(corpus_text[i+2])
+        if current_dict.count(window_queue.items()) != 0:
+            print("Already in!")
+            current_dict[window_queue.items()].update(corpus_text[i+3])
+        else:
+            current_dict.update([window_queue.items()])
+            current_dict[window_queue.items()] = Dictogram()
+            current_dict[window_queue.items()].update([corpus_text[i+3]])
+            print(current_dict)
+
+
+
+
+    print(current_dict)
+
+
+    # for i in range(len(current_markov)):
+
+
+
+
+
+
+# @app.route('/')
 def main():
     """Start main process."""
     start_time = time.time()
-    file_input = grab_file()
-    joined_input = ' '.join(file_input[0])
-    start_token_list = file_input[1]
+    corpus_text = grab_file()
 
-    word_linkedlist = LinkedList()
     final_list = LinkedList()
     tweet = ""
 
-    loops = 20
+    markov_generator(corpus_text)
 
-
-    randomnumber = 4
-    while len(tweet) <= 100:
-        markov_starter(start_token_list, joined_input, final_list, word_linkedlist)
-        print("CURRENT TAIL:", final_list.tail.data)
-        if word_linkedlist.items():
-            markov_loop(joined_input, final_list, loops, word_linkedlist)
-        if len(tweet) + final_list.string_length() < 180:
-            tweet += final_list.room_tweet()
-        if len(tweet) < 100:
-            tweet += " "
-        word_linkedlist.empty_list()
-        final_list.empty_list()
-        if random.randint(1, randomnumber) is 1:
-            break
-    print(tweet)
+    # loops = 20
+    #
+    # randomnumber = 4
+    # while len(tweet) <= 100:
+    #     markov_starter(start_token_list, joined_input, final_list, word_linkedlist)
+    #     if word_linkedlist.items():
+    #         markov_loop(joined_input, final_list, loops, word_linkedlist)
+    #
+    #     if len(tweet) + final_list.string_length() < 180:
+    #         tweet += final_list.room_tweet()
+    #     if len(tweet) < 100:
+    #         tweet += " "
+    #     word_linkedlist.empty_list()
+    #     final_list.empty_list()
+    #     if random.randint(1, randomnumber) is 1:
+    #         break
+    # print(tweet)
 
 
     """Below are the three alternate functions not needed for the tweetgen."""
@@ -143,15 +183,15 @@ def main():
 
     print("--- %s seconds --- end total \n\n\n" % (time.time() - start_time))
     # print(input_histo.tokens)
-    return render_template('main.html', output=tweet, time=time.time())
+    # return render_template('main.html', output=tweet, time=time.time())
 
 
-@app.route('/about')
+# @app.route('/about')
 def about():
     """Redirects for other pages."""
     return render_template('about.html')
 
-@app.route('/tweet', methods=['POST'])
+# @app.route('/tweet', methods=['POST'])
 def tweet():
     status = request.form['sentence']
     twitter.tweet(status)

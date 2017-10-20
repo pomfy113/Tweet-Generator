@@ -11,7 +11,6 @@ class Listogram(list):
     def update(self, iterable):
         """Update this histogram with the items in the given iterable"""
         for item in iterable:
-            print("going through", iterable)
             self.tokens += 1
             if self.__contains__(item) is False:
                 self.append([item, 1])
