@@ -80,49 +80,34 @@ def room_capitalize(text):
     return text
 
 def markov_generator(corpus_text, start_time):
-    """Let's walk it."""
-    markov_pickle = Path("markov.pickle")
+    corpus_ll = LinkedList(corpus_text)
 
-    if markov_pickle.is_file():
-        with open('markov.pickle', 'rb') as f:
-            markov_walked = pickle.load(f)
-        return markov_walked
-    else:
-        corpus_ll = LinkedList(corpus_text)
+    window_queue = LinkedList()
+    current_table = {}
 
-        window_queue = LinkedList()
-        current_table = HashTable()
+    window_queue.append(corpus_text[0])
+    window_queue.append(corpus_text[1])
+    current_table[(window_queue.items())] = corpus_text[2]
 
-        window_queue.append(corpus_text[0])
-        window_queue.append(corpus_text[1])
-        current_table.set((window_queue.items()), [corpus_text[2]])
 
-        print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
+    print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
 
-        for i in range(corpus_ll.length()-3):
-            window_queue.move()
-            window_queue.append(corpus_text[i+2])
-            next_word = corpus_text[i+3]
+    for i in range(corpus_ll.length()-3):
+        window_queue.move()
+        window_queue.append(corpus_text[i+2])
+        next_word = corpus_text[i+3]
 
-            if current_table.contains((window_queue.items())):
-                currentvalues = current_table.get(window_queue.items())
-                currentvalues.append(next_word)
-                new_value = currentvalues
+        if window_queue.items() in current_table:
+            current_table[(window_queue.items())][(next_word)] += 1
+        else:
+            current_table[(window_queue.items())] = (next_word, 1)
+        print(current_table)
+    print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
 
-                current_table.set((window_queue.items()), new_value)
-            else:
-                current_table.set((window_queue.items()), [next_word])
+    for key, value in current_table:
+        current_table(key, Dictogram(value))
 
-        print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
-
-        for key, value in current_table.items():
-            current_table.set(key, Dictogram(value))
-
-        print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
-
-        sys.setrecursionlimit(2000)
-        with open('markov.pickle', 'wb') as f:
-            pickle.dump(markov_walked, f)
+    print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
 
     return current_table
 
@@ -143,8 +128,14 @@ def main():
 
     print("--- %s seconds --- pre-walk \n\n\n" % (time.time() - start_time))
 
+    # if markov_pickle.is_file():
+    #     with open('markov.pickle', 'rb') as f:
+    #         markov_walked = pickle.load(f)
+    # else:
     markov_walked = markov_generator(corpus_text, start_time)
-
+    #     sys.setrecursionlimit(2000)
+    #     with open('markov.pickle', 'wb') as f:
+    #         pickle.dump(markov_walked, f)
 
 
     print("--- %s seconds --- markov walk \n\n\n" % (time.time() - start_time))
