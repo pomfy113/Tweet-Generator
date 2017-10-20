@@ -102,7 +102,7 @@ def room_capitalize(text):
     return text
 
 def markov_generator(corpus_text):
-    corpus_text = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'fish', 'two']
+    corpus_text = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'fish', 'two', 'fish']
     corpus_ll = LinkedList(corpus_text)
     window_queue = LinkedList()
     current_dict = Dictogram()
@@ -114,17 +114,26 @@ def markov_generator(corpus_text):
     current_dict[window_queue.items()].update([corpus_text[2]])
 
 
-    for i in range(corpus_ll.length()-2):
+    for i in range(corpus_ll.length()):
         window_queue.move()
-        window_queue.append(corpus_text[i+2])
-        if current_dict.count(window_queue.items()) != 0:
-            print("Already in!")
-            current_dict[window_queue.items()].update(corpus_text[i+3])
-        else:
+        window_queue.append(corpus_text[i+3])
+
+        if window_queue.items() not in current_dict:
             current_dict.update([window_queue.items()])
-            current_dict[window_queue.items()] = Dictogram()
-            current_dict[window_queue.items()].update([corpus_text[i+3]])
-            print(current_dict)
+        current_dict[window_queue.items()] = Dictogram()
+        print("Current next word:", corpus_text[i+4])
+
+        # if current_dict[window_queue.items()].count(corpus_text[i+4]) != 0:
+        #     print("Already in!")
+        #     current_dict[window_queue.items()][corpus_text[i+4]] += 1
+        # else:
+        current_dict[window_queue.items()].update('fish')
+        # if current_dict[window_queue.items()].count(corpus_text[i+4])
+
+        print("New dictionary:", current_dict[window_queue.items()])
+        # print(current_dict[window_queue.items()][corpus_text[i+4]])
+
+        print(window_queue.items(), "\n", current_dict, "\n===================")
 
 
 
