@@ -13,7 +13,6 @@ from hashtable import HashTable
 import twitter
 import pickle
 from pathlib import Path
-import sys
 
 
 
@@ -45,7 +44,7 @@ def markov_starter(markov_table, window_queue):
 
         window_queue.append(first_words[0])
         window_queue.append(first_words[1])
-        print(markov_table.contains(window_queue.items()))
+
         new_word = probability_gen(markov_table.get(window_queue.items()))
 
         window_queue.append(new_word)
@@ -81,6 +80,7 @@ def room_capitalize(text):
 
 def markov_generator(corpus_text, start_time):
     corpus_ll = LinkedList(corpus_text)
+<<<<<<< HEAD
 
     window_queue = LinkedList()
     current_table = {}
@@ -108,6 +108,39 @@ def markov_generator(corpus_text, start_time):
         current_table(key, Dictogram(value))
 
     print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
+=======
+
+    window_queue = LinkedList()
+    current_table = HashTable()
+
+    window_queue.append(corpus_text[0])
+    window_queue.append(corpus_text[1])
+    current_table.set((window_queue.items()), [corpus_text[2]])
+
+    print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
+
+    for i in range(corpus_ll.length()-3):
+        window_queue.move()
+        window_queue.append(corpus_text[i+2])
+        next_word = corpus_text[i+3]
+
+        if current_table.contains((window_queue.items())):
+            currentvalues = current_table.get(window_queue.items())
+            currentvalues.append(next_word)
+            new_value = currentvalues
+
+            current_table.set((window_queue.items()), new_value)
+        else:
+            current_table.set((window_queue.items()), [next_word])
+
+    print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
+
+    for key, value in current_table.items():
+        current_table.set(key, Dictogram(value))
+
+    print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
+
+>>>>>>> parent of 9577f4b... blabla pickles
 
     return current_table
 
@@ -120,7 +153,6 @@ def main():
     """Start main process."""
     start_time = time.time()
     corpus_text = grab_file()
-    markov_pickle = Path("markov.pickle")
 
     window_queue = LinkedList()
     final_list = LinkedList()
@@ -128,6 +160,7 @@ def main():
 
     print("--- %s seconds --- pre-walk \n\n\n" % (time.time() - start_time))
 
+<<<<<<< HEAD
     # if markov_pickle.is_file():
     #     with open('markov.pickle', 'rb') as f:
     #         markov_walked = pickle.load(f)
@@ -137,7 +170,11 @@ def main():
     #     with open('markov.pickle', 'wb') as f:
     #         pickle.dump(markov_walked, f)
 
+=======
+>>>>>>> parent of 9577f4b... blabla pickles
 
+    # with open('markov.pickle', 'w') as f:
+    markov_walked = markov_generator(corpus_text, start_time)
     print("--- %s seconds --- markov walk \n\n\n" % (time.time() - start_time))
 
     markov_starter(markov_walked, window_queue)
