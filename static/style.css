@@ -48,7 +48,7 @@ body{
    font-size: 80px;
    font-style: italic;
    font-weight: bold;
-  animation: rainbow 1s infinite, shakey 3s infinite;
+   animation: rainbow 1s infinite;
 }
 
 .balloon{
