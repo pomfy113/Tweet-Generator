@@ -22,7 +22,7 @@ def grab_file():
         histofile = open("theroomcleanedup.txt", "w+")
         histofile.write(' '.join(file_input))
         histofile.close()
-    # file_input = clean_up(file_input)
+
     return file_input
 
 def room_service(filename):
@@ -33,7 +33,8 @@ def room_service(filename):
     # remove weird [bla] stuff
     audibility = re.sub(r"(?:\[inaudible\]|\[incomprehensible\])", '', actions_removed)
     # create stop tokens
-    stop_tokens_period = re.sub(r"(\.)", ' [stop-p] [start]', audibility)
+    stop_tokens_double = re.sub(r"(\?\!)", ' [stop-qe] [start]', audibility)
+    stop_tokens_period = re.sub(r"(\.)", ' [stop-p] [start]', stop_tokens_double)
     stop_tokens_excla = re.sub(r"(\!)", ' [stop-e] [start]', stop_tokens_period)
     stop_tokens_quest = re.sub(r"(\?)", ' [stop-q] [start]', stop_tokens_excla)
     # only puts in dialogue

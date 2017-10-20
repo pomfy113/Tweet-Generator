@@ -13,12 +13,11 @@ from hashtable import HashTable
 import twitter
 import pickle
 from pathlib import Path
+from werkzeug.contrib.cache import SimpleCache
 
 
-
-
+markov_full_table = None
 app = Flask(__name__)
-
 
 def stop_checker(stopstring):
     """This just checks for the stop tokens."""
@@ -28,151 +27,133 @@ def stop_checker(stopstring):
         return '?'
     elif stopstring == '[stop-e]':
         return '!'
+    elif stopstring == '[stop-eq]':
+        return '?!'
     elif stopstring is None:
         return '.'
     return
 
+def markov_loop(markov_table, window_queue, temp_tweet):
+    """Let's get that loop started."""
+    # Beginning with start keys
+    start_keys = []
+    for first, second in (markov_table.keys()):
+        if (first == '[start]'):
+            start_keys.append((first, second))
 
-def markov_starter(markov_table, window_queue):
-        """Start off the markov sentence."""
-        start_keys = []
-        stop_tokens = ['[stop-p]', '[stop-q]', '[stop-e]', None]
-        for first, second in (markov_table.keys()):
-            if (first == '[start]'):
-                start_keys.append((first, second))
-        first_set = Dictogram(start_keys)
-        first_words = probability_gen(first_set)
+    # Create dictogram of start tokens, then randomly generates one
+    first_set = Dictogram(start_keys)
+    first_words = probability_gen(first_set)
 
-        window_queue.append(first_words[0])
-        if first_words[1] in stop_tokens:
-            window_queue.append(stop_checker)
-            return
+    # Window created! And let's put in the first word.
+    window_queue.append(first_words[0])
+    window_queue.append(first_words[1])
+    temp_tweet.append(first_words[1])
 
-        window_queue.append(first_words[1])
+    # Pass in function; should return a word (see above function)
+    window_items = markov_table.get(window_queue.items())
+    new_word = probability_gen(markov_table.get(window_items))
 
-        new_word = probability_gen(markov_table.get(window_queue.items()))
-
+    # While it's not a stop token, let's keep generating words!
+    while new_word not in {'[stop-p]', '[stop-q]', '[stop-e]', '[stop-eq]', None}:
+        # Moving window up
         window_queue.append(new_word)
         window_queue.move()
-
-        return
-        # Just in case.
-
-
-# TO-DO: Rename variables
-def markov_loop(markov_table, window_queue):
-    """Markov maker!"""
-    final_list = window_queue.stringify()
-    new_word = probability_gen(markov_table.get(window_queue.items()))
-
-    while new_word not in {'[stop-p]', '[stop-q]', '[stop-e]', None}:
-        window_queue.append(new_word)
-        final_list += " " + new_word
-        window_queue.move()
-        new_word = probability_gen(markov_table.get(window_queue.items()))
-
-    final_list += stop_checker(new_word)
-    return (final_list)
+        # To add to the sentence we'll test
+        temp_tweet.append(new_word)
+        # New word using probability generator
+        window_items = markov_table.get(window_queue.items())
+        new_word = probability_gen(markov_table.get(window_items))
+    # End of the line! No need to return things due to linked list!
+    temp_tweet.append(stop_checker(new_word))
+    return
 
 def room_capitalize(text):
     """Capitalize text as needed based on input."""
     capitalize_input = "capitalize-room.txt"
     capitalize_these = open(capitalize_input).read().split("\n")
+    text = text.split(" ")
     for value, word in enumerate(text):
         if word in capitalize_these:
             text[value] = word.capitalize()
-    return text
+    return ' '.join(text)
 
-def markov_generator(corpus_text, start_time):
+def markov_generator(corpus_text):
+    """Make the actual markov table."""
+    """It's a hashtable with tuples, followed by a list=>dictionary."""
+
+    # Here's my corpus in LL form
     corpus_ll = LinkedList(corpus_text)
-
+    # Here's the window and the table
     window_queue = LinkedList()
     current_table = HashTable()
 
+    # Currently second order. WIP for making it more.
+    # Current window for iterating through corpus
     window_queue.append(corpus_text[0])
     window_queue.append(corpus_text[1])
     current_table.set((window_queue.items()), [corpus_text[2]])
 
-    print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
-
+    # Now the loop for the rest
     for i in range(corpus_ll.length()-3):
+        # For dequeue -> queue
         window_queue.move()
         window_queue.append(corpus_text[i+2])
+        # Word after for placing into dictionary
         next_word = corpus_text[i+3]
-
+        # If it's already in, add the word to the list
         if current_table.contains((window_queue.items())):
+            # New word stuff to add onto the table
             currentvalues = current_table.get(window_queue.items())
             currentvalues.append(next_word)
             new_value = currentvalues
 
             current_table.set((window_queue.items()), new_value)
         else:
+            # If it's not, we got a new set
             current_table.set((window_queue.items()), [next_word])
 
-    print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
-
+    # Turn the second element (list) into a dictogram
     for key, value in current_table.items():
         current_table.set(key, Dictogram(value))
-
-    print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
-
 
     return current_table
 
 
-
-
-
-# @app.route('/')
+@app.before_first_request
 def main():
     """Start main process."""
-    start_time = time.time()
+    # This is for the initial load
+    global markov_full_table
     corpus_text = grab_file()
 
+    markov_full_table = markov_generator(corpus_text)
+
+
+@app.route('/')
+def tweetthis():
+    global markov_full_table
+    markov_walked = markov_full_table
+    start_time = time.time()
+
     window_queue = LinkedList()
-    final_list = LinkedList()
-    temp_tweet = ""
+
+    temp_tweet = LinkedList()
     last_tweet = ""
 
-    print("--- %s seconds --- pre-walk \n\n\n" % (time.time() - start_time))
-
-
-    markov_walked = markov_generator(corpus_text, start_time)
-    print("--- %s seconds --- markov walk \n\n\n" % (time.time() - start_time))
-
     while(len(last_tweet) < 60):
-        markov_starter(markov_walked, window_queue)
-        if window_queue.tail in ['.', '!', '?']:
-            temp_tweet += window_queue.stringify()
-        else:
-            temp_tweet += markov_loop(markov_walked, window_queue)
-        if len(last_tweet) + len(temp_tweet) < 120:
-            last_tweet += temp_tweet
+        print("Current window:", window_queue)
+        print("Current length:", len(last_tweet))
+        markov_loop(markov_walked, window_queue, temp_tweet)
+        if temp_tweet.string_length() + len(last_tweet) < 120:
+            last_tweet += temp_tweet.room_tweet() + " "
         window_queue.empty_list()
-
+        temp_tweet.empty_list()
+    print("Final tweet:", last_tweet)
     print("--- %s seconds --- markov done \n\n\n" % (time.time() - start_time))
 
-    print(last_tweet)
+    return render_template('main.html', output=last_tweet)
 
-
-
-    # loops = 20
-    #
-    # randomnumber = 4
-    # while len(tweet) <= 100:
-    #     markov_starter(start_token_list, joined_input, final_list, word_linkedlist)
-    #     if word_linkedlist.items():
-    #         markov_loop(joined_input, final_list, loops, word_linkedlist)
-    #
-    #     if len(tweet) + final_list.string_length() < 180:
-    #         tweet += final_list.room_tweet()
-    #     if len(tweet) < 100:
-    #         tweet += " "
-    #     word_linkedlist.empty_list()
-    #     final_list.empty_list()
-    #     if random.randint(1, randomnumber) is 1:
-    #         break
-    # print(tweet)
 
 
     """Below are the three alternate functions not needed for the tweetgen."""
@@ -191,6 +172,7 @@ def main():
     # print(input_histo.tokens)
     # return render_template('main.html', output=tweet, time=time.time())
 
+@app.route('/')
 
 # @app.route('/about')
 def about():

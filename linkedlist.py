@@ -160,7 +160,7 @@ class LinkedList(object):
     def room_tweet(self):
         capitalize_input = "capitalize-room.txt"
         capitalize_these = open(capitalize_input).read().split("\n")
-        text_list = self.items()
+        text_list = list(self.items())
 
         for value, word in enumerate(text_list):
             if value is 0:
