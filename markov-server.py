@@ -36,13 +36,18 @@ def stop_checker(stopstring):
 def markov_starter(markov_table, window_queue):
         """Start off the markov sentence."""
         start_keys = []
+        stop_tokens = ['[stop-p]', '[stop-q]', '[stop-e]', None]
         for first, second in (markov_table.keys()):
-            if (first == '[start]') and (second not in {'[stop-p]', '[stop-q]', '[stop-e]', None}):
+            if (first == '[start]'):
                 start_keys.append((first, second))
         first_set = Dictogram(start_keys)
         first_words = probability_gen(first_set)
 
         window_queue.append(first_words[0])
+        if first_words[1] in stop_tokens:
+            window_queue.append(stop_checker)
+            return
+
         window_queue.append(first_words[1])
 
         new_word = probability_gen(markov_table.get(window_queue.items()))
@@ -67,7 +72,7 @@ def markov_loop(markov_table, window_queue):
         new_word = probability_gen(markov_table.get(window_queue.items()))
 
     final_list += stop_checker(new_word)
-    print(final_list)
+    return (final_list)
 
 def room_capitalize(text):
     """Capitalize text as needed based on input."""
@@ -80,35 +85,6 @@ def room_capitalize(text):
 
 def markov_generator(corpus_text, start_time):
     corpus_ll = LinkedList(corpus_text)
-<<<<<<< HEAD
-
-    window_queue = LinkedList()
-    current_table = {}
-
-    window_queue.append(corpus_text[0])
-    window_queue.append(corpus_text[1])
-    current_table[(window_queue.items())] = corpus_text[2]
-
-
-    print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
-
-    for i in range(corpus_ll.length()-3):
-        window_queue.move()
-        window_queue.append(corpus_text[i+2])
-        next_word = corpus_text[i+3]
-
-        if window_queue.items() in current_table:
-            current_table[(window_queue.items())][(next_word)] += 1
-        else:
-            current_table[(window_queue.items())] = (next_word, 1)
-        print(current_table)
-    print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
-
-    for key, value in current_table:
-        current_table(key, Dictogram(value))
-
-    print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
-=======
 
     window_queue = LinkedList()
     current_table = HashTable()
@@ -140,7 +116,6 @@ def markov_generator(corpus_text, start_time):
 
     print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
 
->>>>>>> parent of 9577f4b... blabla pickles
 
     return current_table
 
@@ -156,32 +131,28 @@ def main():
 
     window_queue = LinkedList()
     final_list = LinkedList()
-    tweet = ""
+    temp_tweet = ""
+    last_tweet = ""
 
     print("--- %s seconds --- pre-walk \n\n\n" % (time.time() - start_time))
 
-<<<<<<< HEAD
-    # if markov_pickle.is_file():
-    #     with open('markov.pickle', 'rb') as f:
-    #         markov_walked = pickle.load(f)
-    # else:
-    markov_walked = markov_generator(corpus_text, start_time)
-    #     sys.setrecursionlimit(2000)
-    #     with open('markov.pickle', 'wb') as f:
-    #         pickle.dump(markov_walked, f)
 
-=======
->>>>>>> parent of 9577f4b... blabla pickles
-
-    # with open('markov.pickle', 'w') as f:
     markov_walked = markov_generator(corpus_text, start_time)
     print("--- %s seconds --- markov walk \n\n\n" % (time.time() - start_time))
 
-    markov_starter(markov_walked, window_queue)
-    print("--- %s seconds --- markov starter \n\n\n" % (time.time() - start_time))
+    while(len(last_tweet) < 60):
+        markov_starter(markov_walked, window_queue)
+        if window_queue.tail in ['.', '!', '?']:
+            temp_tweet += window_queue.stringify()
+        else:
+            temp_tweet += markov_loop(markov_walked, window_queue)
+        if len(last_tweet) + len(temp_tweet) < 120:
+            last_tweet += temp_tweet
+        window_queue.empty_list()
 
-    markov_loop(markov_walked, window_queue)
     print("--- %s seconds --- markov done \n\n\n" % (time.time() - start_time))
+
+    print(last_tweet)
 
 
 
