@@ -26,6 +26,7 @@ def list_prob(input_histo):
         accumulator = 0.0
         finished_list = []
         for key, value in input_histo:
+            print("Printing k/v:", key, value)
             accumulator += float(value/input_histo.tokens)
             if accumulator >= random_num:
                 return key

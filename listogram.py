@@ -12,17 +12,17 @@ class Listogram(list):
         """Update this histogram with the items in the given iterable"""
         for item in iterable:
             self.tokens += 1
-            if self.__contains__(item) is False:
-                self.append([item, 1])
+            if not self.__contains__(item):
+                self.append((item, 1))
                 self.types += 1
             else:
-                for word in self:
-                    if item == word[0]:
-                        word[1] += 1
+                for word, value in self:
+                    if item == word:
+                        self[self._index(item)] = (word, value+1)
 
     def count(self, item):
         """Return the count of the given item in this histogram, or 0"""
-        if self.__contains__(item) is False:
+        if not self.__contains__(item):
             return 0
         else:
             for word, value in self:

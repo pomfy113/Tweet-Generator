@@ -9,88 +9,65 @@ from probability import probability_gen
 from listogram import Listogram
 from dictogram import Dictogram
 from linkedlist import LinkedList
+from hashtable import HashTable
 import twitter
+import pickle
+from pathlib import Path
+
+
 
 
 app = Flask(__name__)
 
 
-def stop_checker(stopstring, final_list):
+def stop_checker(stopstring):
     """This just checks for the stop tokens."""
     if stopstring == '[stop-p]':
-        final_list.append('.')
+        return '.'
     elif stopstring == '[stop-q]':
-        final_list.append('?')
+        return '?'
     elif stopstring == '[stop-e]':
-        final_list.append('!')
-    elif stopstring == None:
-        final_list.append('.')
+        return '!'
+    elif stopstring is None:
+        return '.'
     return
 
 
-def markov_starter(start_token_list, joined_input, final_list, word_linkedlist):
+def markov_starter(markov_table, window_queue):
         """Start off the markov sentence."""
+        start_keys = []
+        for first, second in (markov_table.keys()):
+            if (first == '[start]') and (second not in {'[stop-p]', '[stop-q]', '[stop-e]', None}):
+                start_keys.append((first, second))
+        first_set = Dictogram(start_keys)
+        first_words = probability_gen(first_set)
+
+        window_queue.append(first_words[0])
+        window_queue.append(first_words[1])
+
+        new_word = probability_gen(markov_table.get(window_queue.items()))
+
+        window_queue.append(new_word)
+        window_queue.move()
+
+        return
         # Just in case.
-        infinite_stopper = 4
-        # START tokens. Start off with a single word.
-        start_token_histo = Dictogram(start_token_list)
-        first_word = probability_gen(start_token_histo).lower()
-        word_linkedlist.append(first_word)
-        final_list.append(first_word)
 
-        # Checking for the second word.
-        new_list = Dictogram(re.findall(r'\[stop-\w\] %s ([\[\]\w\'\:\-\,]*)' % str(first_word), joined_input))
-        second_word = probability_gen(new_list)
-
-        # For checking one word sentences.
-        while second_word in {'[stop-p]', '[stop-q]', '[stop-e]', None}:
-            if infinite_stopper <= 0 or second_word is None:
-                stop_checker(second_word, final_list)
-                word_linkedlist.empty_list()
-                return ' '.join(word_linkedlist.items())
-            second_word = probability_gen(new_list)
-            infinite_stopper -= 1
-
-        # Append to window and the ongoing sentence.
-        word_linkedlist.append(second_word)
-        final_list.append(second_word)
-
-        return ' '.join(word_linkedlist.items())
 
 # TO-DO: Rename variables
-def markov_loop(file_input, final_list, loops, word_linkedlist):
-    """Markov maker; recursive, based on variable 'loop'."""
-    """This is going to be a doozy, so keep a close eye on those comments."""
-    if final_list.string_length() > 180:
-        print("A bit too long!")
-        return word_linkedlist
-    # Return once we're out of loops
-    if loops is False:
-        return word_linkedlist
+def markov_loop(markov_table, window_queue):
+    """Markov maker!"""
+    final_list = window_queue.stringify()
+    new_word = probability_gen(markov_table.get(window_queue.items()))
 
-    # Combine window before passing it into regex findall
-    word = ' '.join(word_linkedlist.items())
-    pattern = r' %s ([\[\]\w\'\:\-\,]*)' % str(word)
-    following_words = re.findall(pattern, file_input)
-    new_list = Dictogram(following_words)
-    new_word = probability_gen(new_list)
+    while new_word not in {'[stop-p]', '[stop-q]', '[stop-e]', None}:
+        window_queue.append(new_word)
+        final_list += " " + new_word
+        window_queue.move()
+        new_word = probability_gen(markov_table.get(window_queue.items()))
 
-    # if stop token, then do the stop-check to punctuate properly
-    if new_word in {'[stop-p]', '[stop-q]', '[stop-e]', None}:
-        print("STOPPING")
-        stop_checker(new_word, final_list)
-        loops = False
-        return word_linkedlist
-
-    # Add to window and ongoing list
-    word_linkedlist.append(new_word)
-    final_list.append(new_word)
-
-    # Dequeue, then next!
-    word_linkedlist.move()
-    markov_loop(file_input, final_list, loops, word_linkedlist)
-
-    return word_linkedlist
+    final_list += stop_checker(new_word)
+    print(final_list)
 
 def room_capitalize(text):
     """Capitalize text as needed based on input."""
@@ -101,48 +78,41 @@ def room_capitalize(text):
             text[value] = word.capitalize()
     return text
 
-def markov_generator(corpus_text):
-    corpus_text = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'fish', 'two', 'fish']
+def markov_generator(corpus_text, start_time):
     corpus_ll = LinkedList(corpus_text)
+
     window_queue = LinkedList()
-    current_dict = Dictogram()
+    current_table = HashTable()
 
     window_queue.append(corpus_text[0])
     window_queue.append(corpus_text[1])
-    current_dict.update([window_queue.items()])
-    current_dict[window_queue.items()] = Dictogram()
-    current_dict[window_queue.items()].update([corpus_text[2]])
+    current_table.set((window_queue.items()), [corpus_text[2]])
 
+    print("--- %s seconds --- pre dict \n\n\n" % (time.time() - start_time))
 
-    for i in range(corpus_ll.length()):
+    for i in range(corpus_ll.length()-3):
         window_queue.move()
-        window_queue.append(corpus_text[i+3])
+        window_queue.append(corpus_text[i+2])
+        next_word = corpus_text[i+3]
 
-        if window_queue.items() not in current_dict:
-            current_dict.update([window_queue.items()])
-        current_dict[window_queue.items()] = Dictogram()
-        print("Current next word:", corpus_text[i+4])
+        if current_table.contains((window_queue.items())):
+            currentvalues = current_table.get(window_queue.items())
+            currentvalues.append(next_word)
+            new_value = currentvalues
 
-        # if current_dict[window_queue.items()].count(corpus_text[i+4]) != 0:
-        #     print("Already in!")
-        #     current_dict[window_queue.items()][corpus_text[i+4]] += 1
-        # else:
-        current_dict[window_queue.items()].update('fish')
-        # if current_dict[window_queue.items()].count(corpus_text[i+4])
+            current_table.set((window_queue.items()), new_value)
+        else:
+            current_table.set((window_queue.items()), [next_word])
 
-        print("New dictionary:", current_dict[window_queue.items()])
-        # print(current_dict[window_queue.items()][corpus_text[i+4]])
+    print("--- %s seconds --- post dict \n\n\n" % (time.time() - start_time))
 
-        print(window_queue.items(), "\n", current_dict, "\n===================")
+    for key, value in current_table.items():
+        current_table.set(key, Dictogram(value))
 
-
+    print("--- %s seconds --- Dictogram set \n\n\n" % (time.time() - start_time))
 
 
-    print(current_dict)
-
-
-    # for i in range(len(current_markov)):
-
+    return current_table
 
 
 
@@ -154,10 +124,24 @@ def main():
     start_time = time.time()
     corpus_text = grab_file()
 
+    window_queue = LinkedList()
     final_list = LinkedList()
     tweet = ""
 
-    markov_generator(corpus_text)
+    print("--- %s seconds --- pre-walk \n\n\n" % (time.time() - start_time))
+
+
+    # with open('markov.pickle', 'w') as f:
+    markov_walked = markov_generator(corpus_text, start_time)
+    print("--- %s seconds --- markov walk \n\n\n" % (time.time() - start_time))
+
+    markov_starter(markov_walked, window_queue)
+    print("--- %s seconds --- markov starter \n\n\n" % (time.time() - start_time))
+
+    markov_loop(markov_walked, window_queue)
+    print("--- %s seconds --- markov done \n\n\n" % (time.time() - start_time))
+
+
 
     # loops = 20
     #
