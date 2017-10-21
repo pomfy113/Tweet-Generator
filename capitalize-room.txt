@@ -28,6 +28,9 @@ friday
 canadian
 susan
 peter
+golden
+gate
+park
 i,
 i'm,
 i'll,

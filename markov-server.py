@@ -1,48 +1,33 @@
 """It's a tweet generator thing."""
-import time
 from flask import Flask, render_template, request, redirect
-import re
 import random
 from grabfile import grab_file
 # from cleanup import get_dictionary
 from probability import probability_gen
-from listogram import Listogram
 from dictogram import Dictogram
 from linkedlist import LinkedList
 from hashtable import HashTable
 import twitter
-import pickle
-from pathlib import Path
-from werkzeug.contrib.cache import SimpleCache
 
-
-markov_full_table = None
 app = Flask(__name__)
 
-def stop_checker(stopstring):
-    """This just checks for the stop tokens."""
-    if stopstring == '[stop-p]':
-        return '.'
-    elif stopstring == '[stop-q]':
-        return '?'
-    elif stopstring == '[stop-e]':
-        return '!'
-    elif stopstring == '[stop-eq]':
-        return '?!'
-    elif stopstring is None:
-        return '.'
+# Markov Hash Table + start tokens, preloaded before server call
+MARKOV_FULL_TABLE = None
+# Start tokens and stop tokens
+START_TOKENS = []
+STOPTOKEN = ['[stop-p]', '[stop-q]', '[stop-e]', '[stop-qe]', None]
+STOPPUNCT = ['.', '?', '!', '?!']
+
+def stop_checker(word):
+    """Check for the stop tokens."""
+    for value, word in enumerate(STOPTOKEN):
+        return STOPPUNCT[value]
     return
 
 def markov_loop(markov_table, window_queue, temp_tweet):
     """Let's get that loop started."""
-    # Beginning with start keys
-    start_keys = []
-    for first, second in (markov_table.keys()):
-        if (first == '[start]'):
-            start_keys.append((first, second))
-
     # Create dictogram of start tokens, then randomly generates one
-    first_set = Dictogram(start_keys)
+    first_set = Dictogram(START_TOKENS)
     first_words = probability_gen(first_set)
 
     # Window created! And let's put in the first word.
@@ -51,33 +36,26 @@ def markov_loop(markov_table, window_queue, temp_tweet):
     temp_tweet.append(first_words[1])
 
     # Pass in function; should return a word (see above function)
-    new_word = probability_gen(markov_table.get(window_queue.items()))
+    dict_lookup = markov_table.get(window_queue.items())
+    new_word = probability_gen(dict_lookup)
 
     # While it's not a stop token, let's keep generating words!
-    while new_word not in {'[stop-p]', '[stop-q]', '[stop-e]', '[stop-eq]', None}:
+    while new_word not in STOPTOKEN:
         # Moving window up
         window_queue.append(new_word)
         window_queue.move()
         # To add to the sentence we'll test
         temp_tweet.append(new_word)
         # New word using probability generator
-        new_word = probability_gen(markov_table.get(window_queue.items()))
+        dict_lookup = markov_table.get(window_queue.items())
+        new_word = probability_gen(dict_lookup)
 
     # End of the line! No need to return things due to linked list!
     temp_tweet.append(stop_checker(new_word))
     return
 
-def room_capitalize(text):
-    """Capitalize text as needed based on input."""
-    capitalize_input = "capitalize-room.txt"
-    capitalize_these = open(capitalize_input).read().split("\n")
-    text = text.split(" ")
-    for value, word in enumerate(text):
-        if word in capitalize_these:
-            text[value] = word.capitalize()
-    return ' '.join(text)
 
-def markov_generator(corpus_text):
+def table_generator(corpus_text):
     """Make the actual markov table."""
     """It's a hashtable with tuples, followed by a list=>dictionary."""
 
@@ -118,23 +96,30 @@ def markov_generator(corpus_text):
 
     return current_table
 
+def start_token_gen():
+    start_tokens = []
+    for first, second in (MARKOV_FULL_TABLE.keys()):
+        if (first == '[start]'):
+            start_tokens.append((first, second))
+    return start_tokens
 
 @app.before_first_request
 def main():
     """Start main process."""
     # This is for the initial load
-    global markov_full_table
+    global MARKOV_FULL_TABLE
+    global START_TOKENS
     corpus_text = grab_file()
 
-    markov_full_table = markov_generator(corpus_text)
-
+    MARKOV_FULL_TABLE = table_generator(corpus_text)
+    START_TOKENS = start_token_gen()
 
 @app.route('/')
 def tweetthis():
     """Generate a sentence. Preloaded."""
     # This is from the initial load
-    global markov_full_table
-    markov_walked = markov_full_table
+    global MARKOV_FULL_TABLE
+    markov_walked = MARKOV_FULL_TABLE
 
     # Initializing the Markov Window and the tweet that we'll checks
     # Currently we check the size
@@ -155,29 +140,11 @@ def tweetthis():
         temp_tweet.empty_list()
         # Roll that dice!
         RNG = random.randint(0, 4)
-        print(RNG)
     print("Final tweet:", last_tweet)
 
     return render_template('main.html', output=last_tweet)
 
 
-
-    """Below are the three alternate functions not needed for the tweetgen."""
-    # Word you want to search up for frequency; change as needed
-    # word = "the"
-
-    # input_histo = Dictogram(file_input[0])
-    # histogram(input_histo)
-    # unique words... was replaced by dictogram
-    # unique_words(input_histo.tokens)
-    # input_histo.tokens
-    # word frequency... also replaced
-    # input_histo.count(word)
-
-    # print(input_histo.tokens)
-    # return render_template('main.html', output=tweet, time=time.time())
-
-@app.route('/')
 
 @app.route('/about')
 def about():
