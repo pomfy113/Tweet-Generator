@@ -1,3 +1,6 @@
+"""It's a dictionary."""
+
+
 class Dictogram(dict):
     """It's a dictionary."""
 

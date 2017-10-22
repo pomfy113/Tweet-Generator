@@ -1,6 +1,7 @@
 """Deals with making probabilities."""
 import random
 
+
 def probability_gen(input_histo):
     """Generate a word/sentence based on probability and weights."""
     # Go through dictionary; keep adding its weight to accumulator
@@ -21,7 +22,9 @@ def dict_prob(input_histo):
             return key
             break
 
+
 def list_prob(input_histo):
+        """Do this if it's a list."""
         random_num = random.random()
         accumulator = 0.0
         finished_list = []

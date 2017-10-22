@@ -25,8 +25,8 @@ def grab_file():
 
     return file_input
 
-def room_service(filename):
 
+def room_service(filename):
     """Cleans 'The Room' script."""
     # removes all actions
     actions_removed = re.sub(r"( \(.*\))", '', filename)
@@ -43,12 +43,3 @@ def room_service(filename):
     regular_text.insert(0, '[start]')
 
     return(regular_text)
-
-
-def capitalize_check(text):
-    capitalize_input = "capitalize-room.txt"
-    capitalize_these = open(capitalize_input).read().split("\n")
-    for value, word in enumerate(text):
-        if word in capitalize_these:
-            text[value] = word.capitalize()
-    return text

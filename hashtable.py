@@ -46,13 +46,12 @@ class HashTable(object):
         return all_values
 
     def items(self):
-        """Return a list of all items (key-value pairs) in this hash table."""
+        """Return a list of all key-value pairs in this hash table."""
         # O(n). See above again. Just about the same really.
         all_items = []
         for bucket in self.buckets:
             all_items.extend(bucket.items())
         return all_items
-
 
     def length(self):
         """Return the length of this hash table by traversing its buckets."""
@@ -60,14 +59,14 @@ class HashTable(object):
         # TECHNICALLY it shouldn't change in terms of real time running;
         # When all spread out in buckets vs in the same linked list is same.
         # nvm, since we're only initializing a constant amount of pail, it's
-        # O(n) (ll.length) + 8(amount of buckets) + 1 (initialization of count)+ 1 (return)
+        # O(n) (ll.length) + buckets + 1 (initialization of count)+ 1 (return)
         count = 0
         for pail in self.buckets:
             count += pail.length()
         return count
 
     def contains(self, key):
-        """Return True if this hash table contains the given key, or False"""
+        """Return True if this hash table contains the given key, or False."""
         # Check bucket O(1), then do a find O(n). It's O(n)
         # Worst case scenario is if it's at the end of a bucket.
 
@@ -123,6 +122,7 @@ class HashTable(object):
 
 
 def test_hash_table():
+    """Test."""
     ht = HashTable()
     print(ht)
 

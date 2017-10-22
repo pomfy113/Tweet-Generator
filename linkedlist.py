@@ -1,6 +1,6 @@
 #!python
-
 from __future__ import print_function
+import re
 
 
 class Node(object):
@@ -74,7 +74,7 @@ class LinkedList(object):
         pass
 
     def prepend(self, item):
-        """Insert the given item at the head of this linked list"""
+        """Insert the given item at the head of this linked list."""
         # See append; almost the same with things switched up
         # O(6) total; constants are the same
         new_node = Node(item)
@@ -86,7 +86,7 @@ class LinkedList(object):
         pass
 
     def delete(self, item):
-        """Delete the given item from this linked list, or raise ValueError"""
+        """Delete the given item from this linked list, or raise ValueError."""
         # Hoo boy. It depends.
         # See each bit for their individual; constant on here is 3
         current = self.head
@@ -152,12 +152,15 @@ class LinkedList(object):
         self.head.next = None
 
     def stringify(self):
+        """Turn current linked list into string."""
         return ' '.join(self.items()).replace(" .", ".")
 
     def string_length(self):
+        """Return string length."""
         return len(self.stringify())
 
     def room_tweet(self):
+        """Capitalization clean-up."""
         capitalize_input = "capitalize-room.txt"
         capitalize_these = open(capitalize_input).read().split("\n")
         text_list = list(self.items())
@@ -167,13 +170,17 @@ class LinkedList(object):
                 text_list[value] = word.capitalize()
             if word in capitalize_these:
                 text_list[value] = word.capitalize()
-        return ' '.join(text_list).replace(" .", ".").replace(" !", "!").replace(" ?", "?")
 
+        text_list = ' '.join(text_list)
+        text_list = re.sub(r'(\s)(?=[\!\?\.])', "", text_list)
+        return text_list
 
     def empty_list(self):
+        """Empty the list."""
         self.head = None
         self.tail = None
         return
+
 
 def test_linked_list():
     ll = LinkedList()

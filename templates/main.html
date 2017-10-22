@@ -23,95 +23,96 @@
     </ul>
 </div>
 </nav>
+
 <!-- I wanna cut the entire thing in 3/4ths. -->
 <div class="row">
-<div class="col-9">
-<!-- It's a spoon -->
-<img src="../static/images/spoon.png" class="spoon">
+    <div class="col-9">
+    <!-- It's a spoon -->
+    <img src="../static/images/spoon.png" class="spoon">
 
-<!-- Tweet output -->
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div class="tweet"><h1>{{output}}</h1></div>
+    <!-- Tweet output -->
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="tweet"><h1>{{output}}</h1></div>
+        </div>
+
+    </div>
+    <div class="row justify-content-center">
+        <form action="/tweet" method="post">
+          <input type="hidden" name="sentence" value="{{output}}">
+          <button type="submit">Cheep-cheep-cheep</button>
+        </form>
     </div>
 
-</div>
-<div class="row justify-content-center">
-    <form action="/tweet" method="post">
-      <input type="hidden" name="sentence" value="{{output}}">
-      <button type="submit">Cheep-cheep-cheep</button>
-    </form>
-</div>
+    <!-- It's a spoon -->
+    <img src="../static/images/spoon.png" class="spoon">
 
-<!-- It's a spoon -->
-<img src="../static/images/spoon.png" class="spoon">
-
-<!-- Wiseau images -->
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div class="justify-content: center;">
-            <img src="../static/images/giphy.gif" style="width: 30%;">
-            <img src="../static/images/giphy2.gif" style="width: 30%;">
-            <img src="../static/images/giphy.gif" style="width: 30%;">
+    <!-- Wiseau images -->
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="justify-content: center;">
+                <img src="../static/images/giphy.gif" style="width: 30%;">
+                <img src="../static/images/giphy2.gif" style="width: 30%;">
+                <img src="../static/images/giphy.gif" style="width: 30%;">
+            </div>
         </div>
     </div>
-</div>
 
-<!-- It's a spoon. And a football -->
-<img src="../static/images/spoon.png" class="spoon">
-<img src="../static/images/football.png" class="football">
+    <!-- It's a spoon. And a football -->
+    <img src="../static/images/spoon.png" class="spoon">
+    <img src="../static/images/football.png" class="football">
 
-<!-- Rainbow text -->
-<div class="row justify-content-center">
-    <div class="col-8"><h2 class="rainbow">BEST TWEETGEN ALL TIME 2017</h2><br><br></div>
-    <div class="col-3">
-        <img src="../static/images/hidog.gif" class="dog">
+    <!-- Rainbow text -->
+    <div class="row justify-content-center">
+        <div class="col-8"><h2 class="rainbow">BEST TWEETGEN ALL TIME 2017</h2><br><br></div>
+        <div class="col-3">
+            <img src="../static/images/hidog.gif" class="dog">
+        </div>
     </div>
-</div>
 
-<!-- It's a spoon. -->
-<img src="../static/images/spoon.png" class="spoon">
+    <!-- It's a spoon. -->
+    <img src="../static/images/spoon.png" class="spoon">
 
-<!-- Row of balloons -->
-<div class="row justify-content-around">
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0s;">
+    <!-- Row of balloons -->
+    <div class="row justify-content-around">
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.25s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.75s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.1s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.3s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.4s;">
+        </div>
+        <div class="col-1">
+            <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.6s;">
+        </div>
     </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.25s;">
-    </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.75s;">
-    </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.1s;">
-    </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.3s;">
-    </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.4s;">
-    </div>
-    <div class="col-1">
-        <img src="../static/images/balloon.png" class="balloon" style="animation-delay: 0.6s;">
-    </div>
-</div>
 
-<!-- It's text -->
-<br><br>
-<p style="color=white;">I did not hit her</p>
+    <!-- It's text -->
+    <br><br>
+    <p style="color=white;">I did not hit her</p>
 
-<!-- To end the ORIGINAL 3/4th column -->
-</div>
+    <!-- To end the ORIGINAL 3/4th column -->
+    </div>
 <!-- Next 1/4th-->
 <!-- Here's the tweets-->
-<div class="col-3">
-        <div style="margin: 20px;">
-            <a class="twitter-timeline" data-width="300" data-height="600" data-theme="dark"
-            data-link-color="#2B7BB9" href="https://twitter.com/room_tweetgen?ref_src=twsrc%5Etfw">
-            Tweets by room_tweetgen</a>
-            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
+    <div class="col-3">
+            <div style="margin: 20px;">
+                <a class="twitter-timeline" data-width="300" data-height="600" data-theme="dark"
+                data-link-color="#2B7BB9" href="https://twitter.com/room_tweetgen?ref_src=twsrc%5Etfw">
+                Tweets by room_tweetgen</a>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
 </div>
 <!-- Final div for the row (top of page) -->
 </div>
